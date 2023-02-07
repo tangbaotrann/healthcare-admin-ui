@@ -1,22 +1,29 @@
 // lib
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Table } from "antd";
+import { Button, Modal, Table } from "antd";
+import moment from "moment";
+
+// me
+import "./TableAccountList.css";
 import userSlice, {
   fetchApiAwaitBrowsingRuleForDoctor,
   fetchApiDeleteAwaitBrowsingRuleForDoctor,
   fetchApiUserDoctors,
+  fetchApiViewProfileDoctorById,
 } from "../../redux/features/userSlice";
-import { listAwaitBrowsingAccountDoctor } from "../../redux/selector";
-import moment from "moment";
+import {
+  fetchApiViewProfileDoctorByIdSelector,
+  listAwaitBrowsingAccountDoctor,
+} from "../../redux/selector";
+import ProfileDoctor from "../ProfileDoctor/ProfileDoctor";
 
 function TableAccountList() {
+  const [showModalProfileDoctor, setShowModalProfileDoctor] = useState(false);
+
   const dispatch = useDispatch();
 
-  // fetchApiUserDoctorsSelector
   const listUsers = useSelector(listAwaitBrowsingAccountDoctor);
-
-  console.log(listUsers);
 
   // fetch all user
   useEffect(() => {
@@ -44,6 +51,17 @@ function TableAccountList() {
         deleted: true,
       })
     );
+  };
+
+  // handle view profile doctor
+  const handleViewProfile = (record) => {
+    dispatch(fetchApiViewProfileDoctorById(record));
+    setShowModalProfileDoctor(true);
+  };
+
+  // close modal view profile doctor
+  const handleCancel = () => {
+    setShowModalProfileDoctor(false);
   };
 
   // columns
@@ -74,7 +92,11 @@ function TableAccountList() {
       render: (record) => {
         return (
           <>
-            <Button type="dashed" style={{ marginRight: "10px" }}>
+            <Button
+              type="dashed"
+              style={{ marginRight: "10px" }}
+              onClick={() => handleViewProfile(record)}
+            >
               Xem profile
             </Button>
             <Button
@@ -108,11 +130,22 @@ function TableAccountList() {
           username: user.person.username,
           password: "***",
           createdAt: moment(user.createdAt).format("YYYY-MM-DD"),
+          person: user.person,
           _id: user._id,
         }))}
         columns={cols}
         rowKey="account"
       ></Table>
+
+      {/* View profile doctor */}
+      <Modal
+        open={showModalProfileDoctor}
+        onCancel={handleCancel}
+        cancelButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{ style: { display: "none" } }}
+      >
+        <ProfileDoctor />
+      </Modal>
     </>
   );
 }

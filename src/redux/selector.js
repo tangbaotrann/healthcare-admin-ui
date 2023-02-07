@@ -7,6 +7,10 @@ export const fetchApiUserDoctorsSelector = (state) => state.userSlice.data;
 export const btnClickGetIdAccountDoctorSelector = (state) =>
   state.userSlice.btnClickGetIdAccountDoctor;
 
+// view profile doctor by id
+export const fetchApiViewProfileDoctorByIdSelector = (state) =>
+  state.userSlice.viewProfile;
+
 // load list await browsing account for doctor with isAccepted: false
 export const listAwaitBrowsingAccountDoctor = createSelector(
   fetchApiUserDoctorsSelector,

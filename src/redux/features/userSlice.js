@@ -48,7 +48,6 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
   "user/fetchApiDeleteAwaitBrowsingRuleForDoctor",
   async (values) => {
     try {
-      console.log("values", values);
       const { accountId, deleted } = values;
       const getToken =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlMWYxODgxZTgzMWVhOGFjYTU4MDkwIiwiaWF0IjoxNjc1NzUxODE2fQ.5m63_xnfOBUrAn1l_ngKTvQMaYB1ntYdBddqoff319E";
@@ -65,9 +64,46 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
         }
       );
 
-      console.log("res", res.data);
-
       return res.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
+// view profile doctor by id
+export const fetchApiViewProfileDoctorById = createAsyncThunk(
+  "user/fetchApiViewProfileDoctorById",
+  async (record) => {
+    try {
+      const {
+        _id,
+        specialist,
+        training_place,
+        degree,
+        languages,
+        certificate,
+        education,
+        experiences,
+        doctor,
+      } = record;
+
+      const res = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}doctors/profile/${_id}`,
+        {
+          _id: _id,
+          specialist: specialist,
+          training_place: training_place,
+          degree: degree,
+          languages: languages,
+          certificate: certificate,
+          education: education,
+          experiences: experiences,
+        }
+      );
+      console.log("res view profile", res.data.data);
+
+      return res.data.data;
     } catch (err) {
       console.log({ err });
     }
@@ -79,6 +115,7 @@ const userSlice = createSlice({
   initialState: {
     data: [],
     await: [],
+    viewProfile: [],
     btnClickGetIdAccountDoctor: null,
   },
   reducers: {
@@ -96,7 +133,10 @@ const userSlice = createSlice({
         (state, action) => {
           state.await = action.payload;
         }
-      );
+      )
+      .addCase(fetchApiViewProfileDoctorById.fulfilled, (state, action) => {
+        state.viewProfile = action.payload;
+      });
   },
 });
 
