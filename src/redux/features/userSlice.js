@@ -7,7 +7,6 @@ export const fetchApiUserDoctors = createAsyncThunk(
   async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_BASE_URL}doctors`);
-      console.log("res doctors -", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -19,10 +18,51 @@ export const fetchApiUserDoctors = createAsyncThunk(
 // await browsing rule for doctor
 export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
   "user/fetchApiAwaitBrowsingRuleForDoctor",
-  async () => {
+  async (values) => {
     try {
+      const { accountId, isAccepted } = values;
+      const getToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlMWYxODgxZTgzMWVhOGFjYTU4MDkwIiwiaWF0IjoxNjc1NzUxODE2fQ.5m63_xnfOBUrAn1l_ngKTvQMaYB1ntYdBddqoff319E";
+
       const res = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}doctors/id`
+        `${process.env.REACT_APP_BASE_URL}doctors/${accountId}`,
+        { isAccepted: isAccepted },
+        {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${getToken}`,
+            ContentType: "application/json",
+          },
+        }
+      );
+
+      return res.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
+// delete await browsing rule for doctor
+export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
+  "user/fetchApiDeleteAwaitBrowsingRuleForDoctor",
+  async (values) => {
+    try {
+      console.log("values", values);
+      const { accountId, deleted } = values;
+      const getToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlMWYxODgxZTgzMWVhOGFjYTU4MDkwIiwiaWF0IjoxNjc1NzUxODE2fQ.5m63_xnfOBUrAn1l_ngKTvQMaYB1ntYdBddqoff319E";
+
+      const res = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}doctors/${accountId}`,
+        { deleted: deleted },
+        {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${getToken}`,
+            ContentType: "application/json",
+          },
+        }
       );
 
       console.log("res", res.data);
@@ -39,6 +79,12 @@ const userSlice = createSlice({
   initialState: {
     data: [],
     await: [],
+    btnClickGetIdAccountDoctor: null,
+  },
+  reducers: {
+    getIdAccountDoctor: (state, action) => {
+      state.btnClickGetIdAccountDoctor = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder

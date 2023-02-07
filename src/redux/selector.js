@@ -1,2 +1,20 @@
+import { createSelector } from "@reduxjs/toolkit";
+
 // all user
 export const fetchApiUserDoctorsSelector = (state) => state.userSlice.data;
+
+// clicked get id account doctor
+export const btnClickGetIdAccountDoctorSelector = (state) =>
+  state.userSlice.btnClickGetIdAccountDoctor;
+
+// load list await browsing account for doctor with isAccepted: false
+export const listAwaitBrowsingAccountDoctor = createSelector(
+  fetchApiUserDoctorsSelector,
+  (listAccount) => {
+    const list = listAccount.filter(
+      (_account) => _account.isAccepted === false && _account.deleted === false
+    );
+
+    return list;
+  }
+);

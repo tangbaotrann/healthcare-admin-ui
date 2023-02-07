@@ -2,14 +2,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Table } from "antd";
-import { fetchApiUserDoctors } from "../../redux/features/userSlice";
-import { fetchApiUserDoctorsSelector } from "../../redux/selector";
+import userSlice, {
+  fetchApiAwaitBrowsingRuleForDoctor,
+  fetchApiDeleteAwaitBrowsingRuleForDoctor,
+  fetchApiUserDoctors,
+} from "../../redux/features/userSlice";
+import { listAwaitBrowsingAccountDoctor } from "../../redux/selector";
 import moment from "moment";
 
 function TableAccountList() {
   const dispatch = useDispatch();
 
-  const listUsers = useSelector(fetchApiUserDoctorsSelector);
+  // fetchApiUserDoctorsSelector
+  const listUsers = useSelector(listAwaitBrowsingAccountDoctor);
 
   console.log(listUsers);
 
@@ -20,41 +25,70 @@ function TableAccountList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // handle Await Browsing Doctor
+  const handleAwaitBrowsingDoctor = (record) => {
+    dispatch(userSlice.actions.getIdAccountDoctor(record._id));
+    dispatch(
+      fetchApiAwaitBrowsingRuleForDoctor({
+        accountId: record._id,
+        isAccepted: true,
+      })
+    );
+  };
+
+  // handle delete await browsing doctor
+  const handleDeleteAwaitBrowsingDoctor = (record) => {
+    dispatch(
+      fetchApiDeleteAwaitBrowsingRuleForDoctor({
+        accountId: record._id,
+        deleted: true,
+      })
+    );
+  };
+
   // columns
   const cols = [
     {
-      key: "1",
+      key: "account",
       title: "Id",
       dataIndex: "account",
     },
     {
-      key: "2",
+      key: "username",
       title: "Tài khoản",
       dataIndex: "username",
     },
     {
-      key: "3",
+      key: "password",
       title: "Mật khẩu",
       dataIndex: "password",
     },
     {
-      key: "4",
+      key: "createdAt",
       title: "Ngày tạo",
       dataIndex: "createdAt",
     },
     {
       key: "5",
       title: "Hành động",
-      render: () => {
+      render: (record) => {
         return (
           <>
             <Button type="dashed" style={{ marginRight: "10px" }}>
               Xem profile
             </Button>
-            <Button type="primary" style={{ marginRight: "10px" }}>
+            <Button
+              type="primary"
+              style={{ marginRight: "10px" }}
+              onClick={() => handleAwaitBrowsingDoctor(record)}
+            >
               Duyệt
             </Button>
-            <Button type="primary" danger>
+            <Button
+              type="primary"
+              danger
+              onClick={() => handleDeleteAwaitBrowsingDoctor(record)}
+            >
               Không duyệt
             </Button>
           </>
@@ -74,9 +108,10 @@ function TableAccountList() {
           username: user.person.username,
           password: "***",
           createdAt: moment(user.createdAt).format("YYYY-MM-DD"),
+          _id: user._id,
         }))}
         columns={cols}
-        rowKey="id"
+        rowKey="account"
       ></Table>
     </>
   );
