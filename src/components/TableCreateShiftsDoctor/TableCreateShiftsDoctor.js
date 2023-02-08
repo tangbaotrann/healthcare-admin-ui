@@ -66,7 +66,7 @@ function TableCreateShiftsDoctor() {
           time_start: moment(shift.time_start).format("h:mm a"),
           _id: shift._id,
         }))}
-        key="_id"
+        rowKey="_id"
         scroll={{ y: 200 }}
       ></Table>
     </>

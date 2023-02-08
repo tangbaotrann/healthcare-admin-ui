@@ -8,8 +8,8 @@ export const fetchApiAllShiftsDoctorSelector = (state) =>
   state.shiftsSlice.data;
 
 // clicked get id account doctor
-export const btnClickGetIdAccountDoctorSelector = (state) =>
-  state.userSlice.btnClickGetIdAccountDoctor;
+// export const btnClickGetIdAccountDoctorSelector = (state) =>
+//   state.userSlice.btnClickGetIdAccountDoctor;
 
 // clicked get id layout (change layout)
 export const btnClickMenuChangeLayoutSelector = (state) =>

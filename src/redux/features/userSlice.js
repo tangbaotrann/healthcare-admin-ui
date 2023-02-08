@@ -116,12 +116,11 @@ const userSlice = createSlice({
     data: [],
     await: [],
     viewProfile: [],
-    btnClickMenuChangeLayout: null,
   },
   reducers: {
-    getIdAccountDoctor: (state, action) => {
-      state.btnClickGetIdAccountDoctor = action.payload;
-    },
+    // getIdAccountDoctor: (state, action) => {
+    //   state.btnClickGetIdAccountDoctor = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder

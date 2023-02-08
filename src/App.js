@@ -12,7 +12,7 @@ function App() {
 
   return (
     <DefaultLayout>
-      {changeLayout === "1" || changeLayout === undefined ? (
+      {changeLayout === "1" || changeLayout === null ? (
         <TableAccountList />
       ) : changeLayout === "2" ? (
         <CreateShiftsDoctor />

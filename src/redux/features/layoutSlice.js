@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const layoutSlice = createSlice({
   name: "layout",
   initialState: {
-    btnClickGetIdAccountDoctor: null,
+    btnClickMenuChangeLayout: null,
   },
   reducers: {
     btnClickMenuChangeLayout: (state, action) => {
