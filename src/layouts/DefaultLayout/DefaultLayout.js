@@ -1,15 +1,17 @@
 // lib
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { OrderedListOutlined } from "@ant-design/icons";
 import {
+  FormOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Layout, Menu, theme } from "antd";
 
 // me
 import "./DefaultLayout.css";
+import layoutSlice from "../../redux/features/layoutSlice";
 
 const { Header, Sider, Content } = Layout;
 
@@ -18,6 +20,8 @@ function DefaultLayout({ children }) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const dispatch = useDispatch();
 
   return (
     <Layout>
@@ -43,14 +47,22 @@ function DefaultLayout({ children }) {
             {
               key: "1",
               icon: <OrderedListOutlined />,
-              label: "Danh sách duyệt tài khoản cho các bác sĩ",
+              label: "Danh sách duyệt tài khoản cho các Bác sĩ",
             },
             {
               key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "Lựa chọn 2",
+              icon: <FormOutlined />,
+              label: "Tạo ca làm cho Bác sĩ",
             },
           ]}
+          // Change layout
+          onSelect={(item) => {
+            if (item.key === "1") {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === "2") {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            }
+          }}
         />
       </Sider>
       <Layout className="site-layout">

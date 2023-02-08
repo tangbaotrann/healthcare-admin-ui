@@ -116,7 +116,7 @@ const userSlice = createSlice({
     data: [],
     await: [],
     viewProfile: [],
-    btnClickGetIdAccountDoctor: null,
+    btnClickMenuChangeLayout: null,
   },
   reducers: {
     getIdAccountDoctor: (state, action) => {

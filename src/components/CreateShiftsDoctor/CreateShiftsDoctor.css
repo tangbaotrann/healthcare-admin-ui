@@ -1,0 +1,33 @@
+.wrapper-create-shifts-doctor {
+    position: relative;
+    width: 100%;
+}
+
+.create-shifts-doctor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #ccc;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.create-shifts-doctor-form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.create-shifts-doctor-form-btn {
+    margin-bottom: 24px;
+}
+
+/* list */
+.create-shifts-doctor-list {
+    position: absolute;
+    top: 400px;
+    left: 0;
+    right: 0;
+}

@@ -1,11 +1,22 @@
+// lib
+import { useSelector } from "react-redux";
+
 // me
-import TableAccountList from "./components/TableAccountList";
 import DefaultLayout from "./layouts/DefaultLayout";
+import TableAccountList from "./components/TableAccountList";
+import CreateShiftsDoctor from "./components/CreateShiftsDoctor/CreateShiftsDoctor";
+import { btnClickMenuChangeLayoutSelector } from "./redux/selector";
 
 function App() {
+  const changeLayout = useSelector(btnClickMenuChangeLayoutSelector);
+
   return (
     <DefaultLayout>
-      <TableAccountList />
+      {changeLayout === "1" || changeLayout === undefined ? (
+        <TableAccountList />
+      ) : changeLayout === "2" ? (
+        <CreateShiftsDoctor />
+      ) : null}
     </DefaultLayout>
   );
 }

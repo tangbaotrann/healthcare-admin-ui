@@ -12,11 +12,9 @@ import userSlice, {
   fetchApiUserDoctors,
   fetchApiViewProfileDoctorById,
 } from "../../redux/features/userSlice";
-import {
-  fetchApiViewProfileDoctorByIdSelector,
-  listAwaitBrowsingAccountDoctor,
-} from "../../redux/selector";
+import { listAwaitBrowsingAccountDoctor } from "../../redux/selector";
 import ProfileDoctor from "../ProfileDoctor/ProfileDoctor";
+import TitleName from "../TitleName/TitleName";
 
 function TableAccountList() {
   const [showModalProfileDoctor, setShowModalProfileDoctor] = useState(false);
@@ -75,6 +73,7 @@ function TableAccountList() {
       key: "username",
       title: "Tài khoản",
       dataIndex: "username",
+      sorter: (a, b) => a.username > b.username,
     },
     {
       key: "password",
@@ -85,6 +84,7 @@ function TableAccountList() {
       key: "createdAt",
       title: "Ngày tạo",
       dataIndex: "createdAt",
+      sorter: (a, b) => a.createdAt - b.createdAt,
     },
     {
       key: "5",
@@ -121,9 +121,9 @@ function TableAccountList() {
 
   return (
     <>
-      <h2 style={{ textAlign: "center" }}>
+      <TitleName>
         Danh sách duyệt tài khoản khi đăng ký tài khoản cho bác sĩ
-      </h2>
+      </TitleName>
       <Table
         dataSource={listUsers.map((user) => ({
           account: user.person.account,
