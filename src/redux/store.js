@@ -1,5 +1,6 @@
 // lib
 import { configureStore } from "@reduxjs/toolkit";
+import daysSlice from "./features/daysSlice";
 import layoutSlice from "./features/layoutSlice";
 import shiftsSlice from "./features/shiftsSlice";
 
@@ -11,6 +12,7 @@ const store = configureStore({
     userSlice: userSlice.reducer,
     shiftsSlice: shiftsSlice.reducer,
     layoutSlice: layoutSlice.reducer,
+    daysSlice: daysSlice.reducer,
   },
 });
 

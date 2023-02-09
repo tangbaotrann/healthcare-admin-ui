@@ -6,6 +6,7 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import TableAccountList from "./components/TableAccountList";
 import CreateShiftsDoctor from "./components/CreateShiftsDoctor/CreateShiftsDoctor";
 import { btnClickMenuChangeLayoutSelector } from "./redux/selector";
+import CreateDaysDoctor from "./components/CreateDaysDoctor/CreateDaysDoctor";
 
 function App() {
   const changeLayout = useSelector(btnClickMenuChangeLayoutSelector);
@@ -16,6 +17,8 @@ function App() {
         <TableAccountList />
       ) : changeLayout === "2" ? (
         <CreateShiftsDoctor />
+      ) : changeLayout === "3" ? (
+        <CreateDaysDoctor />
       ) : null}
     </DefaultLayout>
   );

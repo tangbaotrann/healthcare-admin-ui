@@ -108,7 +108,7 @@ function CreateShiftsDoctor() {
               htmlType="submit"
               block
             >
-              Đăng ký ca làm
+              Tạo ca làm
             </Button>
           </Form>
         </div>

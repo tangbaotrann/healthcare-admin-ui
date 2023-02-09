@@ -1,7 +1,7 @@
 // lib
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { OrderedListOutlined } from "@ant-design/icons";
+import { OrderedListOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import {
   FormOutlined,
   MenuFoldOutlined,
@@ -51,8 +51,13 @@ function DefaultLayout({ children }) {
             },
             {
               key: "2",
-              icon: <FormOutlined />,
+              icon: <ClockCircleOutlined />,
               label: "Tạo ca làm cho Bác sĩ",
+            },
+            {
+              key: "3",
+              icon: <FormOutlined />,
+              label: "Tạo ngày làm cho Bác sĩ",
             },
           ]}
           // Change layout
@@ -60,6 +65,8 @@ function DefaultLayout({ children }) {
             if (item.key === "1") {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === "2") {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === "3") {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             }
           }}
