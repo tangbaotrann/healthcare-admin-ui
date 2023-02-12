@@ -23,11 +23,3 @@
 .create-shifts-doctor-form-btn {
     margin-bottom: 24px;
 }
-
-/* list */
-.create-shifts-doctor-list {
-    position: absolute;
-    top: 400px;
-    left: 0;
-    right: 0;
-}

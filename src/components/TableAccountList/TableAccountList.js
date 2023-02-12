@@ -6,9 +6,7 @@ import moment from "moment";
 
 // me
 import "./TableAccountList.css";
-import userSlice, {
-  fetchApiAwaitBrowsingRuleForDoctor,
-  fetchApiDeleteAwaitBrowsingRuleForDoctor,
+import {
   fetchApiUserDoctors,
   fetchApiViewProfileDoctorById,
 } from "../../redux/features/userSlice";
@@ -30,29 +28,9 @@ function TableAccountList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // handle Await Browsing Doctor
-  const handleAwaitBrowsingDoctor = (record) => {
-    dispatch(userSlice.actions.getIdAccountDoctor(record._id));
-    dispatch(
-      fetchApiAwaitBrowsingRuleForDoctor({
-        accountId: record._id,
-        isAccepted: true,
-      })
-    );
-  };
-
-  // handle delete await browsing doctor
-  const handleDeleteAwaitBrowsingDoctor = (record) => {
-    dispatch(
-      fetchApiDeleteAwaitBrowsingRuleForDoctor({
-        accountId: record._id,
-        deleted: true,
-      })
-    );
-  };
-
   // handle view profile doctor
   const handleViewProfile = (record) => {
+    console.log(record);
     dispatch(fetchApiViewProfileDoctorById(record));
     setShowModalProfileDoctor(true);
   };
@@ -88,7 +66,6 @@ function TableAccountList() {
     },
     {
       key: "5",
-      title: "Hành động",
       render: (record) => {
         return (
           <>
@@ -98,20 +75,6 @@ function TableAccountList() {
               onClick={() => handleViewProfile(record)}
             >
               Xem profile
-            </Button>
-            <Button
-              type="primary"
-              style={{ marginRight: "10px" }}
-              onClick={() => handleAwaitBrowsingDoctor(record)}
-            >
-              Duyệt
-            </Button>
-            <Button
-              type="primary"
-              danger
-              onClick={() => handleDeleteAwaitBrowsingDoctor(record)}
-            >
-              Không duyệt
             </Button>
           </>
         );

@@ -1,5 +1,6 @@
 //lib
-import { Button, Form, Input, message, TimePicker } from "antd";
+import { Button, Form, Input, message, Modal, TimePicker } from "antd";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // me
@@ -12,12 +13,25 @@ import TableCreateShiftsDoctor from "../TableCreateShiftsDoctor";
 const format = "HH:mm";
 
 function CreateShiftsDoctor() {
+  const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
+
+  // show modal
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  // hide modal
+  const handleCancel = () => {
+    setShowModal(false);
+  };
 
   // handle create shifts doctor
   const handleCreateShiftsDoctor = (values) => {
     if (values) {
       dispatch(fetchApiCreateShiftsDoctor(values));
+      setShowModal(false);
       message.success("Bạn đã tạo ca làm thành công cho Bác sĩ.");
     } else {
       message.error("Tạo ca làm không thành công!");
@@ -27,7 +41,17 @@ function CreateShiftsDoctor() {
 
   return (
     <div className="wrapper-create-shifts-doctor">
-      <div className="create-shifts-doctor">
+      <Button onClick={handleOpenModal} type="primary">
+        Tạo ca làm
+      </Button>
+
+      {/* Modal */}
+      <Modal
+        open={showModal}
+        cancelButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{ style: { display: "none" } }}
+        onCancel={handleCancel}
+      >
         <TitleName>Tạo ca làm cho Bác sĩ</TitleName>
 
         <div className="create-shifts-doctor-form">
@@ -112,12 +136,10 @@ function CreateShiftsDoctor() {
             </Button>
           </Form>
         </div>
-      </div>
+      </Modal>
 
       {/* List create shifts doctor */}
-      <div className="create-shifts-doctor-list">
-        <TableCreateShiftsDoctor />
-      </div>
+      <TableCreateShiftsDoctor />
     </div>
   );
 }

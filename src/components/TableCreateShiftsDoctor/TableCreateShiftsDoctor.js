@@ -67,7 +67,7 @@ function TableCreateShiftsDoctor() {
           _id: shift._id,
         }))}
         rowKey="_id"
-        scroll={{ y: 200 }}
+        // scroll={{ y: 800 }}
       ></Table>
     </>
   );

@@ -29,7 +29,7 @@ function DefaultLayout({ children }) {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        width={400}
+        width={250}
         className="sidebar"
       >
         {!collapsed && (
@@ -47,17 +47,17 @@ function DefaultLayout({ children }) {
             {
               key: "1",
               icon: <OrderedListOutlined />,
-              label: "Danh sách duyệt tài khoản cho các Bác sĩ",
+              label: "Danh sách Bác sĩ đợi duyệt",
             },
             {
               key: "2",
               icon: <ClockCircleOutlined />,
-              label: "Tạo ca làm cho Bác sĩ",
+              label: "Quản lý ca làm cho Bác sĩ",
             },
             {
               key: "3",
               icon: <FormOutlined />,
-              label: "Tạo ngày làm cho Bác sĩ",
+              label: "Quản lý ngày làm cho Bác sĩ",
             },
           ]}
           // Change layout

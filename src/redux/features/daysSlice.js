@@ -24,9 +24,22 @@ export const fetchApiCreateDaysDoctor = createAsyncThunk(
           },
         }
       );
-      console.log("res", res.data);
 
       return res.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
+// fetch api all create days
+export const fetchApiAllCreateDaysDoctor = createAsyncThunk(
+  "days/fetchApiAllCreateDaysDoctor",
+  async () => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}days`);
+
+      return res.data.data;
     } catch (err) {
       console.log({ err });
     }
@@ -36,12 +49,17 @@ export const fetchApiCreateDaysDoctor = createAsyncThunk(
 const daysSlice = createSlice({
   name: "days",
   initialState: {
+    data: [],
     days: [],
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchApiCreateDaysDoctor.fulfilled, (state, action) => {
-      state.days = action.payload;
-    });
+    builder
+      .addCase(fetchApiAllCreateDaysDoctor.fulfilled, (state, action) => {
+        state.data = action.payload;
+      })
+      .addCase(fetchApiCreateDaysDoctor.fulfilled, (state, action) => {
+        state.days = action.payload;
+      });
   },
 });
 
