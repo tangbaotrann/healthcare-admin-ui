@@ -8,7 +8,7 @@ export const fetchApiCreateDaysDoctor = createAsyncThunk(
     try {
       const { day, day_number } = values;
       const getToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlMWYxODgxZTgzMWVhOGFjYTU4MDkwIiwiaWF0IjoxNjc1NzUxODE2fQ.5m63_xnfOBUrAn1l_ngKTvQMaYB1ntYdBddqoff319E";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlYTNlYzAyMjFjYTIzMjI5OWUwYzU2IiwiaWF0IjoxNjc2Mjk1ODcyfQ.bqbOHtI3OfpraI91tyfDA5LkQlyn2NiItGZHkobFqK4";
 
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}days`,

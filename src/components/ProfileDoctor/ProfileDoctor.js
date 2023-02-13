@@ -1,6 +1,6 @@
 // lib
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "antd";
+import { Button, message } from "antd";
 
 // me
 import "./ProfileDoctor.css";
@@ -28,6 +28,7 @@ function ProfileDoctor() {
         isAccepted: true,
       })
     );
+    message.success("Bạn đã duyệt tài khoản cho Bác sĩ này thành công!");
   };
 
   // handle delete await browsing doctor
@@ -38,6 +39,7 @@ function ProfileDoctor() {
         deleted: true,
       })
     );
+    message.error("Bạn đã từ chối duyệt tài khoản cho Bác sĩ này!");
   };
 
   return (

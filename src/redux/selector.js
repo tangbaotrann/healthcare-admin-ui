@@ -30,7 +30,6 @@ export const listAwaitBrowsingAccountDoctor = createSelector(
     const list = listAccount.filter(
       (_account) => _account.isAccepted === false && _account.deleted === false
     );
-
     return list;
   }
 );
