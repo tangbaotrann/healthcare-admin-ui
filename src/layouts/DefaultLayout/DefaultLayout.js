@@ -6,6 +6,7 @@ import {
   FormOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Layout, Menu, theme } from "antd";
 
@@ -59,6 +60,15 @@ function DefaultLayout({ children }) {
               icon: <FormOutlined />,
               label: "Quản lý ngày làm cho Bác sĩ",
             },
+            {
+              key: "4",
+              icon: <UnorderedListOutlined />,
+              label: "Quản lý các chỉ số",
+              children: [
+                { label: "Chỉ số BMI", key: "bmi" },
+                { label: "Chỉ số Glycemic", key: "glycemic" },
+              ],
+            },
           ]}
           // Change layout
           onSelect={(item) => {
@@ -67,6 +77,10 @@ function DefaultLayout({ children }) {
             } else if (item.key === "2") {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === "3") {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === "bmi") {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === "glycemic") {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             }
           }}
