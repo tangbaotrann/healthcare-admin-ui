@@ -25,7 +25,7 @@ function TableCreateShiftsDoctor() {
   const cols = [
     {
       key: "_id",
-      title: "Id",
+      title: "#",
       dataIndex: "_id",
     },
     {
@@ -59,12 +59,12 @@ function TableCreateShiftsDoctor() {
       {/* Table list */}
       <Table
         columns={cols}
-        dataSource={shifts.map((shift) => ({
+        dataSource={shifts.map((shift, index) => ({
           desc: shift.desc,
           name: shift.name,
           time_end: moment(shift.time_end).format("h:mm a"),
           time_start: moment(shift.time_start).format("h:mm a"),
-          _id: shift._id,
+          _id: index + 1, //shift._id
         }))}
         rowKey="_id"
         // scroll={{ y: 800 }}

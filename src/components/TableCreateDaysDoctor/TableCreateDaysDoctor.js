@@ -23,7 +23,7 @@ function TableCreateDaysDoctor() {
   const cols = [
     {
       key: "_id",
-      title: "Id",
+      title: "#",
       dataIndex: "_id",
     },
     {
@@ -45,8 +45,8 @@ function TableCreateDaysDoctor() {
 
       <Table
         columns={cols}
-        dataSource={days.map((day) => ({
-          _id: day._id,
+        dataSource={days.map((day, index) => ({
+          _id: index + 1,
           day: day.day,
           day_number: day.day_number,
         }))}
