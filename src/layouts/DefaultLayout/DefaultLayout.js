@@ -12,6 +12,7 @@ import { Layout, Menu, theme } from "antd";
 
 // me
 import "./DefaultLayout.css";
+import constants from "../../utils/constants";
 import layoutSlice from "../../redux/features/layoutSlice";
 
 const { Header, Sider, Content } = Layout;
@@ -43,20 +44,20 @@ function DefaultLayout({ children }) {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[constants.layoutListAccount]}
           items={[
             {
-              key: "1",
+              key: constants.layoutListAccount,
               icon: <OrderedListOutlined />,
               label: "Danh sách Bác sĩ đợi duyệt",
             },
             {
-              key: "2",
+              key: constants.layoutShiftsDoctor,
               icon: <ClockCircleOutlined />,
               label: "Quản lý ca làm cho Bác sĩ",
             },
             {
-              key: "3",
+              key: constants.layoutDaysDoctor,
               icon: <FormOutlined />,
               label: "Quản lý ngày làm cho Bác sĩ",
             },
@@ -65,22 +66,22 @@ function DefaultLayout({ children }) {
               icon: <UnorderedListOutlined />,
               label: "Quản lý các chỉ số",
               children: [
-                { label: "Chỉ số BMI", key: "bmi" },
+                { label: "Chỉ số BMI", key: constants.layoutMetricTypeMBI },
                 { label: "Chỉ số Glycemic", key: "glycemic" },
               ],
             },
           ]}
           // Change layout
           onSelect={(item) => {
-            if (item.key === "1") {
+            if (item.key === constants.layoutListAccount) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
-            } else if (item.key === "2") {
+            } else if (item.key === constants.layoutShiftsDoctor) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
-            } else if (item.key === "3") {
+            } else if (item.key === constants.layoutDaysDoctor) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
-            } else if (item.key === "bmi") {
+            } else if (item.key === constants.layoutMetricTypeMBI) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
-            } else if (item.key === "glycemic") {
+            } else if (item.key === constants.layoutMetricTypeGlycemic) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             }
           }}

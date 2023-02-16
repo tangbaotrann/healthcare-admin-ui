@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 
 // me
 import DefaultLayout from "./layouts/DefaultLayout";
+import constants from "./utils/constants";
 import TableAccountList from "./components/TableAccountList";
 import CreateShiftsDoctor from "./components/CreateShiftsDoctor";
 import { btnClickMenuChangeLayoutSelector } from "./redux/selector";
 import CreateDaysDoctor from "./components/CreateDaysDoctor";
 import ManagerMetricMBI from "./components/ManagerMetricMBI";
-import ManagerMetricGlycemic from "./components/ManagerMetricGlycemic/ManagerMetricGlycemic";
+import ManagerMetricGlycemic from "./components/ManagerMetricGlycemic";
 
 function App() {
   const changeLayout = useSelector(btnClickMenuChangeLayoutSelector);
@@ -16,15 +17,15 @@ function App() {
 
   return (
     <DefaultLayout>
-      {changeLayout === "1" || changeLayout === null ? (
+      {changeLayout === constants.layoutListAccount || changeLayout === null ? (
         <TableAccountList />
-      ) : changeLayout === "2" ? (
+      ) : changeLayout === constants.layoutShiftsDoctor ? (
         <CreateShiftsDoctor />
-      ) : changeLayout === "3" ? (
+      ) : changeLayout === constants.layoutDaysDoctor ? (
         <CreateDaysDoctor />
-      ) : changeLayout === "bmi" ? (
+      ) : changeLayout === constants.layoutMetricTypeMBI ? (
         <ManagerMetricMBI />
-      ) : changeLayout === "glycemic" ? (
+      ) : changeLayout === constants.layoutMetricTypeGlycemic ? (
         <ManagerMetricGlycemic />
       ) : null}
     </DefaultLayout>

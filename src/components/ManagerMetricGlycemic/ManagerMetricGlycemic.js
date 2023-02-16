@@ -6,6 +6,7 @@ import { Button, Form, Input, message, Modal } from "antd";
 // me
 import TitleName from "../TitleName";
 import { fetchApiMetricGlycemic } from "../../redux/features/metricSlice";
+import TableListMetricGlycemic from "./TableListMetricGlycemic/TableListMetricGlycemic";
 
 const { TextArea } = Input;
 
@@ -29,9 +30,9 @@ function ManagerMetricGlycemic() {
     if (values) {
       dispatch(fetchApiMetricGlycemic(values));
       setShowModal(false);
-      message.success("Gửi thành công.");
+      message.success("Tạo thông báo thành công.");
     } else {
-      message.error("Gửi không thành công!");
+      message.error("Tạo thông báo không thành công!");
       return;
     }
   };
@@ -112,10 +113,13 @@ function ManagerMetricGlycemic() {
 
           {/* Button */}
           <Button type="primary" htmlType="submit" block>
-            Xác nhận
+            Tạo thông báo
           </Button>
         </Form>
       </Modal>
+
+      {/* Table list */}
+      <TableListMetricGlycemic />
     </>
   );
 }

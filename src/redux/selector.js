@@ -23,6 +23,9 @@ export const btnClickMenuChangeLayoutSelector = (state) =>
 export const fetchApiViewProfileDoctorByIdSelector = (state) =>
   state.userSlice.viewProfile;
 
+// all metric
+export const fetchApiAllMetricSelector = (state) => state.metricSlice.data;
+
 // load list await browsing account for doctor with isAccepted: false
 export const listAwaitBrowsingAccountDoctor = createSelector(
   fetchApiUserDoctorsSelector,
@@ -30,6 +33,33 @@ export const listAwaitBrowsingAccountDoctor = createSelector(
     const list = listAccount.filter(
       (_account) => _account.isAccepted === false && _account.deleted === false
     );
+    return list;
+  }
+);
+
+// metric type BMI -> fetch api
+export const listMetricTypeMBI = createSelector(
+  fetchApiAllMetricSelector,
+  (listMetricType) => {
+    // console.log("listMetricType", listMetricType);
+    const list = listMetricType.filter(
+      (_metricType) => _metricType.type === "BMI"
+    );
+
+    return list;
+  }
+);
+
+// metric type Glycemic -> fetch api
+export const listMetricTypeGlycemic = createSelector(
+  fetchApiAllMetricSelector,
+  (listMetricType) => {
+    // console.log("listMetricType", listMetricType);
+    const list = listMetricType.filter(
+      (_metricType) => _metricType.type === "GLYCEMIC"
+    );
+    console.log("list", list);
+
     return list;
   }
 );

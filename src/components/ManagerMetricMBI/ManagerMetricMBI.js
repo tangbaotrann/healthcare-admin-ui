@@ -1,11 +1,16 @@
 // lib
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Modal } from "antd";
 
 // me
 import TitleName from "../TitleName";
-import { fetchApiMetricBMI } from "../../redux/features/metricSlice";
+import {
+  fetchApiAllMetric,
+  fetchApiMetricBMI,
+} from "../../redux/features/metricSlice";
+import { listMetricType, listMetricTypeMBI } from "../../redux/selector";
+import TableListMetricMBI from "./TableListMetricMBI/TableListMetricMBI";
 
 const { TextArea } = Input;
 
@@ -13,6 +18,13 @@ function ManagerMetricMBI() {
   const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
+
+  const metrics = useSelector(listMetricTypeMBI);
+
+  useEffect(() => {
+    dispatch(fetchApiAllMetric());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // show modal
   const handleOpenModal = () => {
@@ -28,9 +40,10 @@ function ManagerMetricMBI() {
   const handleOnFishSendNotification = (values) => {
     if (values) {
       dispatch(fetchApiMetricBMI(values));
-      message.success("Gửi thành công!");
+      message.success("Tạo thông báo thành công!");
       setShowModal(false);
     } else {
+      message.error("Tạo thông báo không thành công!");
       return;
     }
   };
@@ -111,10 +124,13 @@ function ManagerMetricMBI() {
 
           {/* Button */}
           <Button type="primary" htmlType="submit" block>
-            Xác nhận
+            Tạo thông báo
           </Button>
         </Form>
       </Modal>
+
+      {/* Table list */}
+      <TableListMetricMBI metrics={metrics} />
     </>
   );
 }
