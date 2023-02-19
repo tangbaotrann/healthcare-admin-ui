@@ -30,10 +30,14 @@ export const fetchApiAllMetricSelector = (state) => state.metricSlice.data;
 export const listAwaitBrowsingAccountDoctor = createSelector(
   fetchApiUserDoctorsSelector,
   (listAccount) => {
-    const list = listAccount.filter(
-      (_account) => _account.isAccepted === false && _account.deleted === false
-    );
-    return list;
+    if (listAccount) {
+      const list = listAccount.filter(
+        (_account) =>
+          _account.isAccepted === false && _account.deleted === false
+      );
+      return list;
+    }
+    return [];
   }
 );
 

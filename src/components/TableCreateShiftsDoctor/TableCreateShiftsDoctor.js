@@ -15,7 +15,7 @@ function TableCreateShiftsDoctor() {
 
   const shifts = useSelector(fetchApiAllShiftsDoctorSelector);
 
-  console.log("shifts", shifts);
+  // console.log("shifts", shifts);
 
   useEffect(() => {
     dispatch(fetchApiAllShiftsDoctor());

@@ -21,8 +21,6 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
   async (values) => {
     try {
       const { accountId, isAccepted } = values;
-      const getToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlYTNlYzAyMjFjYTIzMjI5OWUwYzU2IiwiaWF0IjoxNjc2Mjk1ODcyfQ.bqbOHtI3OfpraI91tyfDA5LkQlyn2NiItGZHkobFqK4";
 
       const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}doctors/${accountId}`,
@@ -30,7 +28,7 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${getToken}`,
+            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
             ContentType: "application/json",
           },
         }
@@ -49,8 +47,6 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
   async (values) => {
     try {
       const { accountId, deleted } = values;
-      const getToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlYTNlYzAyMjFjYTIzMjI5OWUwYzU2IiwiaWF0IjoxNjc2Mjk1ODcyfQ.bqbOHtI3OfpraI91tyfDA5LkQlyn2NiItGZHkobFqK4";
 
       const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}doctors/${accountId}`,
@@ -58,7 +54,7 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${getToken}`,
+            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
             ContentType: "application/json",
           },
         }
