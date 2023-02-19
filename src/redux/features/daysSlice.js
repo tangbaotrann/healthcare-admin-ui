@@ -1,20 +1,22 @@
+// lib
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // fetch api create day doctor
 export const fetchApiCreateDaysDoctor = createAsyncThunk(
   "days/fetchApiCreateDaysDoctor",
-  async (values) => {
+  async ({ dateFormat, weekDay }) => {
+    console.log("dateFormat", dateFormat);
+    console.log("weekDay", weekDay);
     try {
-      const { day, day_number } = values;
       const getToken =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiNjNlYTNlYzAyMjFjYTIzMjI5OWUwYzU2IiwiaWF0IjoxNjc2Mjk1ODcyfQ.bqbOHtI3OfpraI91tyfDA5LkQlyn2NiItGZHkobFqK4";
 
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}days`,
         {
-          day: day,
-          day_number: day_number,
+          day: dateFormat,
+          day_number: weekDay,
         },
         {
           headers: {

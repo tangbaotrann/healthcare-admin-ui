@@ -7,11 +7,14 @@ import { Button, Form, Input, message, Modal, Select } from "antd";
 import "./CreateDaysDoctor.css";
 import TitleName from "../TitleName";
 import { fetchApiCreateDaysDoctor } from "../../redux/features/daysSlice";
-import TableCreateDaysDoctor from "../TableCreateDaysDoctor/TableCreateDaysDoctor";
+import TableCreateDaysDoctor from "../TableCreateDaysDoctor";
+import days from "../../utils/days";
 
 function CreateDaysDoctor() {
   const [showModal, setShowModal] = useState(false);
   const [weekDay, setWeekDay] = useState("");
+
+  // console.log("weekDay", weekDay);
 
   const dispatch = useDispatch();
 
@@ -27,13 +30,20 @@ function CreateDaysDoctor() {
 
   // handle change day number
   const handleChangeDayNumber = (value) => {
-    setWeekDay(value);
+    setWeekDay(+value + 1);
   };
 
   // handle create day doctor
   const handleCreateDaysDoctor = (values) => {
+    let dateFormat = days(+values.day_number);
+
     if (values) {
-      dispatch(fetchApiCreateDaysDoctor(values));
+      dispatch(
+        fetchApiCreateDaysDoctor({
+          dateFormat: dateFormat,
+          weekDay: weekDay,
+        })
+      );
       setShowModal(false);
       message.success("Bạn đã tạo thành công ngày làm cho Bác sĩ.");
     } else {
@@ -66,7 +76,22 @@ function CreateDaysDoctor() {
             fields={[
               {
                 name: ["day"],
-                value: weekDay === "Chủ nhật" ? `${weekDay}` : `Thứ ${weekDay}`,
+                value:
+                  weekDay === 1
+                    ? "Chủ nhật"
+                    : weekDay === 2
+                    ? "Thứ 2"
+                    : weekDay === 3
+                    ? "Thứ 3"
+                    : weekDay === 4
+                    ? "Thứ 4"
+                    : weekDay === 5
+                    ? "Thứ 5"
+                    : weekDay === 6
+                    ? "Thứ 6"
+                    : weekDay === 7
+                    ? "Thứ 7"
+                    : null,
               },
             ]}
           >
@@ -83,13 +108,13 @@ function CreateDaysDoctor() {
             >
               <Select
                 options={[
-                  { value: "2", label: "2" },
-                  { value: "3", label: "3" },
-                  { value: "4", label: "4" },
-                  { value: "5", label: "5" },
-                  { value: "6", label: "6" },
-                  { value: "7", label: "7" },
-                  { value: "Chủ nhật", label: "8" },
+                  { value: "1", label: "2" },
+                  { value: "2", label: "3" },
+                  { value: "3", label: "4" },
+                  { value: "4", label: "5" },
+                  { value: "5", label: "6" },
+                  { value: "6", label: "7" },
+                  { value: "0", label: "8" },
                 ]}
                 onChange={handleChangeDayNumber}
                 placeholder="Ngày bằng số..."

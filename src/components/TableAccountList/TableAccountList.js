@@ -93,7 +93,7 @@ function TableAccountList() {
           account: index + 1,
           username: user.person.username,
           password: "***",
-          createdAt: moment(user.createdAt).format("YYYY-MM-DD"),
+          createdAt: moment(user.createdAt).format("DD-MM-YYYY"),
           person: user.person,
           _id: user._id,
         }))}
