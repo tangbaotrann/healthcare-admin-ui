@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Button, Form, Input, message, Modal } from "antd";
 
 // me
+import "./ManagerMetricGlycemic.css";
 import TitleName from "../TitleName";
 import { fetchApiMetricGlycemic } from "../../redux/features/metricSlice";
 import TableListMetricGlycemic from "./TableListMetricGlycemic/TableListMetricGlycemic";
@@ -39,8 +40,8 @@ function ManagerMetricGlycemic() {
 
   return (
     <>
-      <Button type="primary" onClick={handleOpenModal}>
-        Chỉ số Glycemic
+      <Button className="create-glycemics-btn" onClick={handleOpenModal}>
+        <span>Chỉ số Glycemic</span>
       </Button>
 
       {/* Modal */}

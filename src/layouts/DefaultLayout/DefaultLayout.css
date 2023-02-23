@@ -1,3 +1,63 @@
+/* utils */
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700&display=swap');
+
+/* init var */
+:root {
+
+    /* font-family */
+    --font-family: 'Barlow', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+/* default */
+body {
+    font-family: var(--font-family);
+    color: var(--white);
+    overflow-y: overlay;
+    overflow-x: overlay;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Scrollbar Css */
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* Default layout */
 .sidebar {
     height: 100vh;
+}
+
+.ant-layout {
+    background-color: transparent;
+}
+
+.trigger svg {
+    color: #fff;
+    margin-bottom: 12px;
 }

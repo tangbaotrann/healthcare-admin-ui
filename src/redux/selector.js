@@ -36,8 +36,9 @@ export const listAwaitBrowsingAccountDoctor = createSelector(
           _account.isAccepted === false && _account.deleted === false
       );
       return list;
+    } else {
+      return [];
     }
-    return [];
   }
 );
 
@@ -45,7 +46,7 @@ export const listAwaitBrowsingAccountDoctor = createSelector(
 export const listMetricTypeMBI = createSelector(
   fetchApiAllMetricSelector,
   (listMetricType) => {
-    // console.log("listMetricType", listMetricType);
+    console.log("listMetricType", listMetricType);
     const list = listMetricType.filter(
       (_metricType) => _metricType.type === "BMI"
     );

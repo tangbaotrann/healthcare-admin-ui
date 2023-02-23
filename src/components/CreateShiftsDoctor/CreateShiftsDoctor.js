@@ -41,8 +41,8 @@ function CreateShiftsDoctor() {
 
   return (
     <div className="wrapper-create-shifts-doctor">
-      <Button onClick={handleOpenModal} type="primary">
-        Tạo ca làm
+      <Button onClick={handleOpenModal} className="create-shifts-btn">
+        <span>Tạo ca làm</span>
       </Button>
 
       {/* Modal */}

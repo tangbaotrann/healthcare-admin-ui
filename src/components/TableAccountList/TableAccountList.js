@@ -85,7 +85,7 @@ function TableAccountList() {
   return (
     <>
       <TitleName>
-        Danh sách duyệt tài khoản khi đăng ký tài khoản cho bác sĩ
+        Danh Sách Duyệt Tài Khoản Khi Đăng Ký Tài Khoản Cho Bác Sĩ
       </TitleName>
       <Table
         dataSource={listUsers.map((user, index) => ({

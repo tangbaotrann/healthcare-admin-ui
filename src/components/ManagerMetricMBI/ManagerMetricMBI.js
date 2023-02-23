@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Modal } from "antd";
 
 // me
+import "./ManagerMetricMBI.css";
 import TitleName from "../TitleName";
 import {
   fetchApiAllMetric,
   fetchApiMetricBMI,
 } from "../../redux/features/metricSlice";
-import { listMetricType, listMetricTypeMBI } from "../../redux/selector";
+import { listMetricTypeMBI } from "../../redux/selector";
 import TableListMetricMBI from "./TableListMetricMBI/TableListMetricMBI";
 
 const { TextArea } = Input;
@@ -50,8 +51,8 @@ function ManagerMetricMBI() {
 
   return (
     <>
-      <Button type="primary" onClick={handleOpenModal}>
-        Chỉ số BMI
+      <Button className="create-bmis-btn" onClick={handleOpenModal}>
+        <span>Chỉ số BMI</span>
       </Button>
 
       {/* Modal */}

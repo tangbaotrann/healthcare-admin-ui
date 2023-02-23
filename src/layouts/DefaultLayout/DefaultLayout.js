@@ -14,6 +14,7 @@ import { Layout, Menu, theme } from "antd";
 import "./DefaultLayout.css";
 import constants from "../../utils/constants";
 import layoutSlice from "../../redux/features/layoutSlice";
+import ParticlesBackground from "../../components/ParticlesBackground";
 
 const { Header, Sider, Content } = Layout;
 
@@ -88,7 +89,7 @@ function DefaultLayout({ children }) {
         />
       </Sider>
       <Layout className="site-layout">
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header style={{ padding: 0 }}>
           {React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
             {
@@ -100,13 +101,12 @@ function DefaultLayout({ children }) {
         <Content
           style={{
             margin: "24px 16px",
-            padding: 24,
             minHeight: 280,
-            background: colorBgContainer,
           }}
         >
           {children}
         </Content>
+        <ParticlesBackground />
       </Layout>
     </Layout>
   );

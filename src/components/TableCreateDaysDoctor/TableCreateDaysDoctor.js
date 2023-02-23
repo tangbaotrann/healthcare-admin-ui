@@ -44,7 +44,7 @@ function TableCreateDaysDoctor() {
 
   return (
     <>
-      <TitleName>Danh sách đã tạo ca làm cho Bác sĩ</TitleName>
+      <TitleName>Danh Sách Đã Tạo Ngày Làm Cho Bác Sĩ</TitleName>
 
       <Table
         columns={cols}

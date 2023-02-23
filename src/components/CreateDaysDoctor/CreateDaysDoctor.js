@@ -54,8 +54,8 @@ function CreateDaysDoctor() {
 
   return (
     <div className="wrapper-create-days-doctor">
-      <Button onClick={handleOpenModal} type="primary">
-        Tạo ngày làm
+      <Button onClick={handleOpenModal} className="create-days-btn">
+        <span>Tạo ngày làm</span>
       </Button>
 
       {/* Modal */}

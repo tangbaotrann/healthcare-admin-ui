@@ -1,0 +1,20 @@
+/* Button */
+.create-glycemics-btn {
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    font-weight: 500;
+    max-width: 240px;
+    padding: 24px;
+    line-height: 0;
+    border-radius: 100px;
+    margin-top: 12px;
+    color: #fff;
+    background: linear-gradient(271.41deg, #30b5a1 11.44%, #D68397 93%);
+    box-shadow: 6px 8px 14px 2px #8065cc;
+}
+
+.create-glycemics-btn:hover {
+    color: #fff !important;
+    background: linear-gradient(271.41deg, #5924EF 11.44%, #EF9EB2 93%);
+}

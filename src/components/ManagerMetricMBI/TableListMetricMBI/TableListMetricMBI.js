@@ -2,7 +2,7 @@ import { Table } from "antd";
 import TitleName from "../../TitleName";
 
 function TableListMetricMBI({ metrics }) {
-  console.log("metrics", metrics);
+  console.log("metrics - bmi", metrics);
 
   const cols = [
     {
@@ -34,7 +34,7 @@ function TableListMetricMBI({ metrics }) {
 
   return (
     <>
-      <TitleName>Danh sách chỉ số BMI</TitleName>
+      <TitleName>Danh Sách Chỉ Số BMI</TitleName>
 
       <Table
         columns={cols}

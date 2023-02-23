@@ -56,7 +56,7 @@ function TableCreateShiftsDoctor() {
 
   return (
     <>
-      <TitleName>Danh sách đã tạo ca làm cho Bác sĩ</TitleName>
+      <TitleName>Danh Sách Đã Tạo Ca Làm Cho Bác Sĩ</TitleName>
 
       {/* Table list */}
       <Table
