@@ -2,10 +2,7 @@ const particlesConfig = {
   autoPlay: true,
   background: {
     color: {
-      value: "#fff0f5",
-      //   value: "rgba(255, 255, 255, 0.7)",
-      //   value: "#D68397 #30b5a1",
-      // background: linear-gradient(271.41deg, #30b5a1 11.44%, #D68397 93%);
+      value: "#f8f8ff",
     },
     image: "",
     position: "",

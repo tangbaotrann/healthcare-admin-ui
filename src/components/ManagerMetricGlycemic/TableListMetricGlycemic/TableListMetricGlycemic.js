@@ -18,12 +18,12 @@ function TableListMetricGlycemic() {
     },
     {
       key: "start",
-      title: "Chỉ số bắt đầu",
+      title: "Chỉ số bắt đầu (mg/dl)",
       dataIndex: "start",
     },
     {
       key: "end",
-      title: "Chỉ số kết thúc",
+      title: "Chỉ số kết thúc (mg/dl)",
       dataIndex: "end",
     },
     {
@@ -52,6 +52,8 @@ function TableListMetricGlycemic() {
           type: metric.type,
         }))}
         rowKey="index"
+        style={{ height: "300px" }}
+        scroll={{ y: 400 }}
       ></Table>
     </>
   );

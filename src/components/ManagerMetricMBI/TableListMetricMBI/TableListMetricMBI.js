@@ -46,6 +46,8 @@ function TableListMetricMBI({ metrics }) {
           type: metric.type,
         }))}
         rowKey="index"
+        style={{ height: "300px" }}
+        scroll={{ y: 400 }}
       ></Table>
     </>
   );
