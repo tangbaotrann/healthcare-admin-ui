@@ -9,16 +9,19 @@ function TableListMetricMBI({ metrics }) {
       key: "index",
       title: "#",
       dataIndex: "index",
+      width: "4%",
     },
     {
       key: "start",
       title: "Chỉ số bắt đầu",
       dataIndex: "start",
+      width: "10%",
     },
     {
       key: "end",
       title: "Chỉ số kết thúc",
       dataIndex: "end",
+      width: "10%",
     },
     {
       key: "notification",
@@ -29,6 +32,7 @@ function TableListMetricMBI({ metrics }) {
       key: "type",
       title: "Loại chỉ số",
       dataIndex: "type",
+      width: "10%",
     },
   ];
 
@@ -46,8 +50,8 @@ function TableListMetricMBI({ metrics }) {
           type: metric.type,
         }))}
         rowKey="index"
-        style={{ height: "300px" }}
-        scroll={{ y: 400 }}
+        style={{ height: "280px" }}
+        scroll={{ y: 380 }}
       ></Table>
     </>
   );

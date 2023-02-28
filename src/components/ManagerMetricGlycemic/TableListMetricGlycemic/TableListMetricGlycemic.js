@@ -15,16 +15,19 @@ function TableListMetricGlycemic() {
       key: "index",
       title: "#",
       dataIndex: "index",
+      width: "4%",
     },
     {
       key: "start",
       title: "Chỉ số bắt đầu (mg/dl)",
       dataIndex: "start",
+      width: "10%",
     },
     {
       key: "end",
       title: "Chỉ số kết thúc (mg/dl)",
       dataIndex: "end",
+      width: "10%",
     },
     {
       key: "notification",
@@ -35,6 +38,7 @@ function TableListMetricGlycemic() {
       key: "type",
       title: "Loại chỉ số",
       dataIndex: "type",
+      width: "10%",
     },
   ];
 
@@ -52,8 +56,8 @@ function TableListMetricGlycemic() {
           type: metric.type,
         }))}
         rowKey="index"
-        style={{ height: "300px" }}
-        scroll={{ y: 400 }}
+        style={{ height: "280px" }}
+        scroll={{ y: 380 }}
       ></Table>
     </>
   );
