@@ -23,7 +23,7 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
       const { accountId, isAccepted } = values;
 
       const res = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}doctors/${accountId}`,
+        `${process.env.REACT_APP_BASE_URL}rules/doctor/${accountId}`, // ${process.env.REACT_APP_BASE_URL}doctors/${accountId}
         { isAccepted: isAccepted },
         {
           headers: {
