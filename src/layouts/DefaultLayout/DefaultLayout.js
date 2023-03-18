@@ -6,6 +6,7 @@ import {
   FormOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  TableOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Layout, Menu, theme } from "antd";
@@ -45,8 +46,13 @@ function DefaultLayout({ children }) {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[constants.layoutListAccount]}
+          defaultSelectedKeys={[constants.layoutDashboard]}
           items={[
+            {
+              key: constants.layoutDashboard,
+              icon: <TableOutlined />,
+              label: "Bảng điều khiển",
+            },
             {
               key: constants.layoutListAccount,
               icon: <OrderedListOutlined />,
@@ -68,13 +74,22 @@ function DefaultLayout({ children }) {
               label: "Quản lý các chỉ số",
               children: [
                 { label: "Chỉ số BMI", key: constants.layoutMetricTypeMBI },
-                { label: "Chỉ số Glycemic", key: "glycemic" },
+                {
+                  label: "Chỉ số đường huyết",
+                  key: constants.layoutMetricTypeGlycemic,
+                },
+                {
+                  label: "Chỉ số huyết áp",
+                  key: constants.layoutMetricTypeBloodPressure,
+                },
               ],
             },
           ]}
           // Change layout
           onSelect={(item) => {
-            if (item.key === constants.layoutListAccount) {
+            if (item.key === constants.layoutDashboard) {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === constants.layoutListAccount) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === constants.layoutShiftsDoctor) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
@@ -83,6 +98,8 @@ function DefaultLayout({ children }) {
             } else if (item.key === constants.layoutMetricTypeMBI) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === constants.layoutMetricTypeGlycemic) {
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === constants.layoutMetricTypeBloodPressure) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             }
           }}

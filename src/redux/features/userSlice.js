@@ -1,6 +1,74 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// login
+export const fetchApiLogin = createAsyncThunk(
+  "user/fetchApiLogin",
+  async (values) => {
+    try {
+      const { phone_number, password } = values;
+
+      const formatPhone = phone_number.replace("+84", "0");
+
+      console.log("formatPhone ->", formatPhone);
+
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}auth/login`,
+        {
+          phone_number: formatPhone, //phone_number,
+          password: password,
+        }
+      );
+      // console.log(res.data.data);
+
+      localStorage.setItem(
+        "token_user_login",
+        JSON.stringify(res.data.data.accessToken)
+      );
+
+      return res.data.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
+// register
+export const fetchApiRegister = createAsyncThunk(
+  "user/fetchApiRegister",
+  async (values) => {
+    try {
+      const { confirmPassword, phone_number, password, rule } = values;
+
+      const formatPhone = phone_number.replace("+84", "0");
+
+      console.log("formatPhone ->", formatPhone);
+
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}auth/register`,
+        {
+          phone_number: formatPhone,
+          password: password,
+          rule: rule,
+        },
+        {
+          headers: { Authorization: "***" },
+        }
+      );
+      console.log("res", res.data.data);
+
+      localStorage.setItem(
+        "token_user_login",
+        JSON.stringify(res.data.data.accessToken)
+      );
+
+      return res.data.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
 // find all user Doctor
 export const fetchApiUserDoctors = createAsyncThunk(
   "user/fetchApiUserDoctors",
@@ -18,7 +86,7 @@ export const fetchApiUserDoctors = createAsyncThunk(
 // await browsing rule for doctor
 export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
   "user/fetchApiAwaitBrowsingRuleForDoctor",
-  async (values) => {
+  async ({ values, token }) => {
     try {
       const { accountId, isAccepted } = values;
 
@@ -28,7 +96,7 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             ContentType: "application/json",
           },
         }
@@ -44,7 +112,7 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
 // delete await browsing rule for doctor
 export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
   "user/fetchApiDeleteAwaitBrowsingRuleForDoctor",
-  async (values) => {
+  async ({ values, token }) => {
     try {
       const { accountId, deleted } = values;
 
@@ -54,7 +122,7 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             ContentType: "application/json",
           },
         }
@@ -112,6 +180,8 @@ const userSlice = createSlice({
     data: [],
     await: [],
     viewProfile: [],
+    login: [],
+    register: [],
   },
   reducers: {
     getIdAccountDoctor: (state, action) => {
@@ -120,6 +190,12 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchApiLogin.fulfilled, (state, action) => {
+        state.login = action.payload;
+      })
+      .addCase(fetchApiRegister.fulfilled, (state, action) => {
+        state.register = action.payload;
+      })
       .addCase(fetchApiUserDoctors.fulfilled, (state, action) => {
         state.data = action.payload;
       })

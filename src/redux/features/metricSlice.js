@@ -19,7 +19,7 @@ export const fetchApiAllMetric = createAsyncThunk(
 // fetch api metric bmi
 export const fetchApiMetricBMI = createAsyncThunk(
   "metric/fetchApiMetricBMI",
-  async (values) => {
+  async ({ values, token }) => {
     try {
       console.log("values", values);
       const { start, end, notification, type } = values;
@@ -35,7 +35,7 @@ export const fetchApiMetricBMI = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             ContentType: "application/json",
           },
         }
@@ -52,7 +52,7 @@ export const fetchApiMetricBMI = createAsyncThunk(
 // fetch api metric glycemic
 export const fetchApiMetricGlycemic = createAsyncThunk(
   "metric/fetchApiMetricGlycemic",
-  async (values) => {
+  async ({ values, token }) => {
     try {
       console.log("values", values);
       const { start, end, notification, type } = values;
@@ -68,7 +68,7 @@ export const fetchApiMetricGlycemic = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             ContentType: "application/json",
           },
         }

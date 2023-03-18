@@ -14,12 +14,14 @@ import { listAwaitBrowsingAccountDoctor } from "../../redux/selector";
 import ProfileDoctor from "../ProfileDoctor/ProfileDoctor";
 import TitleName from "../TitleName/TitleName";
 
-function TableAccountList() {
+function TableAccountList({ getToken }) {
   const [showModalProfileDoctor, setShowModalProfileDoctor] = useState(false);
 
   const dispatch = useDispatch();
 
   const listUsers = useSelector(listAwaitBrowsingAccountDoctor);
+
+  console.log("token tbl account list ->", getToken);
 
   // fetch all user
   useEffect(() => {
@@ -108,7 +110,7 @@ function TableAccountList() {
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
       >
-        <ProfileDoctor />
+        <ProfileDoctor getToken={getToken} />
       </Modal>
     </>
   );

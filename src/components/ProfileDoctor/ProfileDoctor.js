@@ -10,10 +10,11 @@ import userSlice, {
   fetchApiDeleteAwaitBrowsingRuleForDoctor,
 } from "../../redux/features/userSlice";
 
-function ProfileDoctor() {
+function ProfileDoctor({ getToken }) {
   const viewProfileDoctor = useSelector(fetchApiViewProfileDoctorByIdSelector);
 
   console.log("viewProfileDoctor", viewProfileDoctor);
+  console.log("token viewProfileDoctor", getToken);
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,7 @@ function ProfileDoctor() {
       fetchApiAwaitBrowsingRuleForDoctor({
         accountId: viewProfileDoctor.doctor._id,
         isAccepted: true,
+        token: getToken,
       })
     );
     message.success("Bạn đã duyệt tài khoản cho Bác sĩ này thành công!");
@@ -37,6 +39,7 @@ function ProfileDoctor() {
       fetchApiDeleteAwaitBrowsingRuleForDoctor({
         accountId: viewProfileDoctor.doctor._id,
         deleted: true,
+        token: getToken,
       })
     );
     message.error("Bạn đã từ chối duyệt tài khoản cho Bác sĩ này!");

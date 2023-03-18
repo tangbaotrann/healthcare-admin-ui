@@ -1,33 +1,19 @@
 // lib
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message, Modal } from "antd";
+import { Button, Form, Input, Modal, message } from "antd";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // me
-import "./ManagerMetricMBI.css";
+import "./ManagerBloodPressure.css";
 import TitleName from "../TitleName";
-import {
-  fetchApiAllMetric,
-  fetchApiMetricBMI,
-} from "../../redux/features/metricSlice";
-import { listMetricTypeMBI } from "../../redux/selector";
-import TableListMetricMBI from "./TableListMetricMBI/TableListMetricMBI";
+import TableListBloodPressure from "./TableListBloodPressure";
 
 const { TextArea } = Input;
 
-function ManagerMetricMBI({ getToken }) {
+function ManagerBloodPressure() {
   const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
-
-  const metrics = useSelector(listMetricTypeMBI);
-
-  console.log("token bmi ->", getToken);
-
-  useEffect(() => {
-    dispatch(fetchApiAllMetric());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // show modal
   const handleOpenModal = () => {
@@ -39,17 +25,17 @@ function ManagerMetricMBI({ getToken }) {
     setShowModal(false);
   };
 
-  // handle submit form
+  // handle submit
   const handleOnFishSendNotification = (values) => {
+    console.log("values", values);
     if (values) {
-      dispatch(
-        fetchApiMetricBMI({
-          values: values,
-          token: getToken,
-        })
-      );
-      message.success("Tạo thông báo thành công!");
+      //   dispatch();
+      // fetchApiMetricGlycemic({
+      //   values: values,
+      //   token: getToken,
+      // })
       setShowModal(false);
+      message.success("Tạo thông báo thành công.");
     } else {
       message.error("Tạo thông báo không thành công!");
       return;
@@ -58,8 +44,8 @@ function ManagerMetricMBI({ getToken }) {
 
   return (
     <>
-      <Button className="create-bmis-btn" onClick={handleOpenModal}>
-        <span>Chỉ số BMI</span>
+      <Button className="create-glycemics-btn" onClick={handleOpenModal}>
+        <span>Chỉ số huyết áp</span>
       </Button>
 
       {/* Modal */}
@@ -79,36 +65,36 @@ function ManagerMetricMBI({ getToken }) {
           fields={[
             {
               name: ["type"],
-              value: "BMI",
+              value: "BLOOD_PRESSURE",
             },
           ]}
         >
-          {/* Chỉ số bắt đầu */}
+          {/* Chỉ số systolic */}
           <Form.Item
-            name="start"
+            name="systolic"
             rules={[
               {
                 required: true,
-                message: "Bạn cần phải nhập chỉ số bắt đầu.",
+                message: "Bạn cần phải nhập chỉ số tâm thu.",
               },
             ]}
             hasFeedback
           >
-            <Input placeholder="Chỉ số bắt đầu..." />
+            <Input placeholder="Chỉ số tâm thu..." />
           </Form.Item>
 
-          {/* Chỉ số kết thúc */}
+          {/* Chỉ số diastole */}
           <Form.Item
-            name="end"
+            name="diastole"
             rules={[
               {
                 required: true,
-                message: "Bạn cần phải nhập chỉ số kết thúc.",
+                message: "Bạn cần phải nhập chỉ số tâm trương.",
               },
             ]}
             hasFeedback
           >
-            <Input placeholder="Chỉ số kết thúc..." />
+            <Input placeholder="Chỉ số tâm trương..." />
           </Form.Item>
 
           {/* Nội dung */}
@@ -138,9 +124,9 @@ function ManagerMetricMBI({ getToken }) {
       </Modal>
 
       {/* Table list */}
-      <TableListMetricMBI metrics={metrics} />
+      <TableListBloodPressure />
     </>
   );
 }
 
-export default ManagerMetricMBI;
+export default ManagerBloodPressure;

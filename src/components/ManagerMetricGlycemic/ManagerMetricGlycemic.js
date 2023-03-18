@@ -11,10 +11,12 @@ import TableListMetricGlycemic from "./TableListMetricGlycemic/TableListMetricGl
 
 const { TextArea } = Input;
 
-function ManagerMetricGlycemic() {
+function ManagerMetricGlycemic({ getToken }) {
   const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
+
+  console.log("token glycemic ->", getToken);
 
   // show modal
   const handleOpenModal = () => {
@@ -29,7 +31,12 @@ function ManagerMetricGlycemic() {
   // handle submit
   const handleOnFishSendNotification = (values) => {
     if (values) {
-      dispatch(fetchApiMetricGlycemic(values));
+      dispatch(
+        fetchApiMetricGlycemic({
+          values: values,
+          token: getToken,
+        })
+      );
       setShowModal(false);
       message.success("Tạo thông báo thành công.");
     } else {
@@ -41,7 +48,7 @@ function ManagerMetricGlycemic() {
   return (
     <>
       <Button className="create-glycemics-btn" onClick={handleOpenModal}>
-        <span>Chỉ số Glycemic</span>
+        <span>Chỉ số đường huyết</span>
       </Button>
 
       {/* Modal */}
@@ -109,7 +116,7 @@ function ManagerMetricGlycemic() {
 
           {/* Type */}
           <Form.Item name="type" hasFeedback style={{ display: "none" }}>
-            <Input />
+            <Input name="type" />
           </Form.Item>
 
           {/* Button */}

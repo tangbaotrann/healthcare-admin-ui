@@ -5,6 +5,8 @@ const constants = {
   layoutDaysDoctor: "3",
   layoutMetricTypeMBI: "bmi",
   layoutMetricTypeGlycemic: "glycemic",
+  layoutMetricTypeBloodPressure: "bloodPressure",
+  layoutDashboard: "dashboard",
 };
 
 export default constants;

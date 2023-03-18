@@ -5,7 +5,7 @@ import axios from "axios";
 // fetch api create day doctor
 export const fetchApiCreateDaysDoctor = createAsyncThunk(
   "days/fetchApiCreateDaysDoctor",
-  async ({ dateFormat, weekDay }) => {
+  async ({ dateFormat, weekDay, token }) => {
     console.log("dateFormat", dateFormat);
     console.log("weekDay", weekDay);
     try {
@@ -18,7 +18,7 @@ export const fetchApiCreateDaysDoctor = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             ContentType: "application/json",
           },
         }

@@ -34,12 +34,12 @@ function TableCreateDaysDoctor() {
       title: "Thứ",
       dataIndex: "day",
     },
-    {
-      key: "day_number",
-      title: "Ngày bằng số",
-      dataIndex: "day_number",
-      sorter: (a, b) => a.day_number - b.day_number,
-    },
+    // {
+    //   key: "day_number",
+    //   title: "Ngày bằng số",
+    //   dataIndex: "day_number",
+    //   sorter: (a, b) => a.day_number - b.day_number,
+    // },
   ];
 
   return (
@@ -51,7 +51,7 @@ function TableCreateDaysDoctor() {
         dataSource={days.map((day, index) => ({
           _id: index + 1,
           day: moment(day.day).format("dddd"),
-          day_number: day.day_number,
+          // day_number: day.day_number,
         }))}
         rowKey="_id"
         style={{ height: "100px" }}

@@ -44,7 +44,7 @@ function TableListMetricGlycemic() {
 
   return (
     <>
-      <TitleName>Danh Sách Chỉ Số Glycemic</TitleName>
+      <TitleName>Danh Sách Chỉ Số Đường Huyết</TitleName>
 
       <Table
         columns={cols}

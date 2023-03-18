@@ -4,7 +4,7 @@ import axios from "axios";
 // fetch api create shifts
 export const fetchApiCreateShiftsDoctor = createAsyncThunk(
   "shifts/fetchApiCreateShiftsDoctor",
-  async (values) => {
+  async ({ values, token }) => {
     try {
       const { name, desc, time_start, time_end } = values;
 
@@ -19,7 +19,7 @@ export const fetchApiCreateShiftsDoctor = createAsyncThunk(
         {
           headers: {
             Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             ContentType: "application/json",
           },
         }

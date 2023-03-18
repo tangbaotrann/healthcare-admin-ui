@@ -12,10 +12,12 @@ import TableCreateShiftsDoctor from "../TableCreateShiftsDoctor";
 // config select time
 const format = "HH:mm";
 
-function CreateShiftsDoctor() {
+function CreateShiftsDoctor({ getToken }) {
   const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
+
+  console.log("getToken", getToken);
 
   // show modal
   const handleOpenModal = () => {
@@ -30,7 +32,12 @@ function CreateShiftsDoctor() {
   // handle create shifts doctor
   const handleCreateShiftsDoctor = (values) => {
     if (values) {
-      dispatch(fetchApiCreateShiftsDoctor(values));
+      dispatch(
+        fetchApiCreateShiftsDoctor({
+          values: values,
+          token: getToken,
+        })
+      );
       setShowModal(false);
       message.success("Bạn đã tạo ca làm thành công cho Bác sĩ.");
     } else {

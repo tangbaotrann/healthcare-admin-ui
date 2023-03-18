@@ -10,11 +10,12 @@ import { fetchApiCreateDaysDoctor } from "../../redux/features/daysSlice";
 import TableCreateDaysDoctor from "../TableCreateDaysDoctor";
 import days from "../../utils/days";
 
-function CreateDaysDoctor() {
+function CreateDaysDoctor({ getToken }) {
   const [showModal, setShowModal] = useState(false);
   const [weekDay, setWeekDay] = useState("");
 
   // console.log("weekDay", weekDay);
+  console.log("getToken create day", getToken);
 
   const dispatch = useDispatch();
 
@@ -42,6 +43,7 @@ function CreateDaysDoctor() {
         fetchApiCreateDaysDoctor({
           dateFormat: dateFormat,
           weekDay: weekDay,
+          token: getToken,
         })
       );
       setShowModal(false);
