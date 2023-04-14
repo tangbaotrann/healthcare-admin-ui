@@ -25,8 +25,8 @@ function ProfileDoctor({ getToken }) {
     );
     dispatch(
       fetchApiAwaitBrowsingRuleForDoctor({
-        accountId: viewProfileDoctor.doctor._id,
-        isAccepted: true,
+        account_id: viewProfileDoctor.doctor._id,
+        is_accepted: true,
         token: getToken,
       })
     );
@@ -37,7 +37,7 @@ function ProfileDoctor({ getToken }) {
   const handleDeleteAwaitBrowsingDoctor = () => {
     dispatch(
       fetchApiDeleteAwaitBrowsingRuleForDoctor({
-        accountId: viewProfileDoctor.doctor._id,
+        account_id: viewProfileDoctor.doctor._id,
         deleted: true,
         token: getToken,
       })

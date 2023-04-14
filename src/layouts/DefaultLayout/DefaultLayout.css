@@ -6,7 +6,7 @@
 :root {
 
     /* font-family */
-    --font-family: 'Barlow', sans-serif;
+    --font-family: 'Quicksand', 'sans-serif' !important;
 }
 
 * {
@@ -60,4 +60,24 @@ html *::-webkit-scrollbar-track {
 .trigger svg {
     color: #fff;
     margin-bottom: 12px;
+}
+
+/* Antd */
+.ant-layout-sider-children {
+    background-color: var(--white);
+}
+
+.ant-layout-header {
+    background-color: var(--white) !important;
+}
+
+.ant-menu-title-content {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Right bar */
+.ant-layout {
+    position: relative;
+    background-color: transparent;
 }

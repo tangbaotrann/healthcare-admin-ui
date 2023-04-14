@@ -25,9 +25,9 @@ export const fetchApiCreateShiftsDoctor = createAsyncThunk(
         }
       );
 
-      console.log("res ->", res.data);
+      console.log("res ->", res.data.data);
 
-      return res.data;
+      return res.data.data;
     } catch (err) {
       console.log({ err });
     }

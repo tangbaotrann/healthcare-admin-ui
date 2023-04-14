@@ -1,7 +1,7 @@
 // me
 import "./CardItem.css";
 
-function CardItem() {
+function CardItem({ totalDoctors }) {
   //   const getTotalScheduleOfDoctor = useSelector(totalScheduleOfDoctor);
   //   const getTotalAppointmentScheduleOfDoctor = useSelector(
   //     totalAppointmentScheduleOfDoctor
@@ -13,12 +13,12 @@ function CardItem() {
       {/* Tổng lịch khám */}
       <div className="card-item">
         <div className="card-item-header">
-          <span className="card-item-header-title">Tổng Lịch Khám </span>
+          <span className="card-item-header-title">Tổng Bác Sĩ</span>
           <span className="card-item-header-change"></span>
         </div>
 
         <div className="card-item-footer">
-          <span className="card-item-footer-type">Hiện có là: </span>
+          <span className="card-item-footer-type">{totalDoctors.length}</span>
           <span className="card-item-footer-amount">
             {/* {getTotalScheduleOfDoctor} */}
           </span>
@@ -35,7 +35,7 @@ function CardItem() {
         </div>
 
         <div className="card-item-footer">
-          <span className="card-item-footer-type">Hiện có là: </span>
+          <span className="card-item-footer-type"> </span>
           <span className="card-item-footer-amount">
             {/* {getTotalAppointmentScheduleOfDoctor} */}
           </span>
@@ -50,7 +50,7 @@ function CardItem() {
         </div>
 
         <div className="card-item-footer">
-          <span className="card-item-footer-type">Hiện có là: </span>
+          <span className="card-item-footer-type"> </span>
           {/* <span className="card-item-footer-amount">{schedules.length}</span> */}
         </div>
       </div>
@@ -63,7 +63,7 @@ function CardItem() {
         </div>
 
         <div className="card-item-footer">
-          <span className="card-item-footer-type">Hiện có là: </span>
+          <span className="card-item-footer-type"> </span>
           {/* <span className="card-item-footer-amount">{getTotalPatients}</span> */}
         </div>
       </div>

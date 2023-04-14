@@ -26,6 +26,8 @@ export const fetchApiLogin = createAsyncThunk(
         JSON.stringify(res.data.data.accessToken)
       );
 
+      console.log("login ->", res.data);
+
       return res.data.data;
     } catch (err) {
       console.log({ err });
@@ -83,16 +85,42 @@ export const fetchApiUserDoctors = createAsyncThunk(
   }
 );
 
+// find all user Patient
+export const fetchApiUserPatients = createAsyncThunk(
+  "user/fetchApiUserPatients",
+  async () => {
+    try {
+      const getToken = JSON.parse(localStorage.getItem("token_user_login"));
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}patients`, {
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          Authorization: `Bearer ${getToken}`,
+          ContentType: "application/json",
+        },
+      });
+
+      return res.data.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
 // await browsing rule for doctor
 export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
   "user/fetchApiAwaitBrowsingRuleForDoctor",
-  async ({ values, token }) => {
+  async ({ account_id, is_accepted, token }) => {
     try {
-      const { accountId, isAccepted } = values;
+      // const getToken = JSON.parse(localStorage.getItem("token_user_login"));
+      // const { account_id, is_accepted, token } = values;
+
+      console.log("account_id", account_id);
+      console.log("is_accepted", is_accepted);
+      console.log("token", token);
 
       const res = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}rules/doctor/${accountId}`, // ${process.env.REACT_APP_BASE_URL}doctors/${accountId}
-        { isAccepted: isAccepted },
+        `${process.env.REACT_APP_BASE_URL}rules/doctor/${account_id}`, // ${process.env.REACT_APP_BASE_URL}doctors/${accountId}
+        { is_accepted: is_accepted },
         {
           headers: {
             Accept: "application/json, text/plain, */*",
@@ -102,7 +130,9 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
         }
       );
 
-      return res.data;
+      console.log("res ->", res.data.data);
+
+      return res.data.data;
     } catch (err) {
       console.log({ err });
     }
@@ -112,12 +142,10 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
 // delete await browsing rule for doctor
 export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
   "user/fetchApiDeleteAwaitBrowsingRuleForDoctor",
-  async ({ values, token }) => {
+  async ({ account_id, deleted, token }) => {
     try {
-      const { accountId, deleted } = values;
-
       const res = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}doctors/${accountId}`,
+        `${process.env.REACT_APP_BASE_URL}rules/doctors/${account_id}`,
         { deleted: deleted },
         {
           headers: {
@@ -127,6 +155,8 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
           },
         }
       );
+
+      console.log("res del ->", res.data);
 
       return res.data;
     } catch (err) {
@@ -182,6 +212,7 @@ const userSlice = createSlice({
     viewProfile: [],
     login: [],
     register: [],
+    patients: [],
   },
   reducers: {
     getIdAccountDoctor: (state, action) => {
@@ -205,6 +236,9 @@ const userSlice = createSlice({
           state.await = action.payload;
         }
       )
+      .addCase(fetchApiUserPatients.fulfilled, (state, action) => {
+        state.patients = action.payload;
+      })
       .addCase(fetchApiViewProfileDoctorById.fulfilled, (state, action) => {
         state.viewProfile = action.payload;
       });

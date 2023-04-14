@@ -36,10 +36,10 @@ function Register() {
     }
 
     try {
-      const res = await setUpRecaptcha(phone_number);
-      console.log(res);
-      setConfirmOTP(res);
-      setFlag(true);
+      // const res = await setUpRecaptcha(phone_number);
+      // console.log(res);
+      // setConfirmOTP(res);
+      // setFlag(true);
     } catch (err) {
       console.log({ err });
     }
@@ -149,7 +149,7 @@ function Register() {
         </Form.Item>
 
         {/* reCaptcha */}
-        <div id="recaptcha-container" />
+        {/* <div id="recaptcha-container" /> */}
 
         {/* Register button */}
         <div className="register-footer">
@@ -161,7 +161,7 @@ function Register() {
       </Form>
 
       {/* Verify captcha (otp) */}
-      <Form
+      {/* <Form
         onFinish={handleOnFinishVerifyOTP}
         onFinishFailed={(error) => {
           console.log({ error });
@@ -181,14 +181,13 @@ function Register() {
           <Input prefix={<PhoneOutlined />} placeholder="Mã OTP của bạn..." />
         </Form.Item>
 
-        {/* Confirm otp button */}
         <div className="register-footer">
           <Link to={endPoints.login}>Quay lại</Link>
           <Button type="primary" htmlType="submit">
             Xác nhận mã OTP
           </Button>
         </div>
-      </Form>
+      </Form> */}
     </BackgroundOutSite>
   );
 }

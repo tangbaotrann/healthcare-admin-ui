@@ -16,6 +16,7 @@ import "./DefaultLayout.css";
 import constants from "../../utils/constants";
 import layoutSlice from "../../redux/features/layoutSlice";
 import ParticlesBackground from "../../components/ParticlesBackground";
+import { logo } from "../../asset/images";
 
 const { Header, Sider, Content } = Layout;
 
@@ -33,18 +34,23 @@ function DefaultLayout({ children }) {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        width={250}
+        width={280}
         className="sidebar"
       >
         {!collapsed && (
           <img
-            style={{ margin: "12px" }}
-            src="https://cdn.jiohealth.com/jio-website/home-page/jio-website-v2.2/assets/images/logo.svg"
+            style={{
+              margin: "12px",
+              width: "220px",
+              // height: "120px",
+              objectFit: "cover",
+            }}
+            // src="https://cdn.jiohealth.com/jio-website/home-page/jio-website-v2.2/assets/images/logo.svg"
+            src={logo.logo}
             alt="logo"
           />
         )}
         <Menu
-          theme="dark"
           mode="inline"
           defaultSelectedKeys={[constants.layoutDashboard]}
           items={[

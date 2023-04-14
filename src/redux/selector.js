@@ -3,6 +3,9 @@ import { createSelector } from "@reduxjs/toolkit";
 // all user
 export const fetchApiUserDoctorsSelector = (state) => state.userSlice.data;
 
+// all patients
+export const fetchApiUserPatientsSelector = (state) => state.userSlice.patients;
+
 // all shifts
 export const fetchApiAllShiftsDoctorSelector = (state) =>
   state.shiftsSlice.data;
@@ -30,11 +33,13 @@ export const fetchApiAllMetricSelector = (state) => state.metricSlice.data;
 export const listAwaitBrowsingAccountDoctor = createSelector(
   fetchApiUserDoctorsSelector,
   (listAccount) => {
+    console.log("li", listAccount);
     if (listAccount) {
       const list = listAccount.filter(
         (_account) =>
-          _account.isAccepted === false && _account.deleted === false
+          _account.is_accepted === false && _account.deleted === false
       );
+      console.log("l", list);
       return list;
     } else {
       return [];

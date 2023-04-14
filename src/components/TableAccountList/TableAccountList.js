@@ -21,7 +21,8 @@ function TableAccountList({ getToken }) {
 
   const listUsers = useSelector(listAwaitBrowsingAccountDoctor);
 
-  console.log("token tbl account list ->", getToken);
+  // console.log("token tbl account list ->", getToken);
+  console.log("listUsers ->", listUsers);
 
   // fetch all user
   useEffect(() => {

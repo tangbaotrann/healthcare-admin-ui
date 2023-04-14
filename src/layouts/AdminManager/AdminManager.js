@@ -1,5 +1,6 @@
 // lib
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // me
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
@@ -15,7 +16,6 @@ import ManagerBloodPressure from "../../components/ManagerBloodPressure/ManagerB
 
 function AdminManager({ getToken }) {
   const changeLayout = useSelector(btnClickMenuChangeLayoutSelector);
-  console.log(changeLayout);
 
   return (
     <DefaultLayout>
