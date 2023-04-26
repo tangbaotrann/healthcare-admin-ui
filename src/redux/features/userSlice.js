@@ -119,26 +119,28 @@ export const fetchApiUserPatients = createAsyncThunk(
   }
 );
 
-// find patient by id
-export const fetchApiPatientById = createAsyncThunk(
-  "user/fetchApiPatientById",
-  async (idPatient) => {
+// find doctor by id
+export const fetchApiDoctorById = createAsyncThunk(
+  "user/fetchApiDoctorById",
+  async (idDoctor) => {
     try {
-      const getToken = JSON.parse(localStorage.getItem("token_user_login"));
+      if (idDoctor) {
+        const getToken = JSON.parse(localStorage.getItem("token_user_login"));
 
-      const res = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/patients/${idPatient}`,
-        {
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${getToken}`,
-            ContentType: "application/json",
-          },
-        }
-      );
-      console.log("res patient by id", res.data.data);
+        const res = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/doctors/${idDoctor}`,
+          {
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              Authorization: `Bearer ${getToken}`,
+              ContentType: "application/json",
+            },
+          }
+        );
+        console.log("res doctor by id", res.data.data);
 
-      return res.data.data;
+        return res.data.data;
+      }
     } catch (err) {
       console.log({ err });
     }
@@ -252,6 +254,9 @@ const userSlice = createSlice({
     login: [],
     register: [],
     patients: [],
+    doctorById: [],
+    isLoading: false,
+    btnClickedFilterDoctor: null,
   },
   reducers: {
     getIdAccountDoctor: (state, action) => {
@@ -260,13 +265,20 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchApiDoctorById.fulfilled, (state, action) => {
+        state.doctorById = action.payload;
+      })
       .addCase(fetchApiLogin.fulfilled, (state, action) => {
         state.login = action.payload;
       })
       .addCase(fetchApiRegister.fulfilled, (state, action) => {
         state.register = action.payload;
       })
+      .addCase(fetchApiUserDoctors.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(fetchApiUserDoctors.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.data = action.payload;
       })
       .addCase(

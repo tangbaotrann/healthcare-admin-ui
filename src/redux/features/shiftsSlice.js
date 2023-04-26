@@ -63,6 +63,7 @@ const shiftsSlice = createSlice({
   initialState: {
     data: [],
     shifts: [],
+    isLoading: false,
   },
   extraReducers: (builder) => {
     builder
@@ -72,7 +73,11 @@ const shiftsSlice = createSlice({
         }
         // state.shifts = action.payload;
       })
+      .addCase(fetchApiAllShiftsDoctor.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(fetchApiAllShiftsDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.data = action.payload;
       });
   },

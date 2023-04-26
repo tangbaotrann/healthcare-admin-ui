@@ -134,6 +134,7 @@ const metricSlice = createSlice({
     data: [],
     bmi: [],
     glycemic: [],
+    isLoading: false,
   },
   extraReducers: (builder) => {
     builder
@@ -152,7 +153,11 @@ const metricSlice = createSlice({
           state.data.push(action.payload);
         }
       })
+      .addCase(fetchApiAllMetric.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(fetchApiAllMetric.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.data = action.payload;
       });
   },

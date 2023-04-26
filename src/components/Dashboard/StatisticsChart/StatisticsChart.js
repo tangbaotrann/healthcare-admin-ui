@@ -72,7 +72,7 @@ function StatisticsChart({ doctors }) {
           focus: "series",
         },
         showSymbol: false,
-        data: doctors.map((_doctor) => _doctor.revenue),
+        data: doctors?.map((_doctor) => _doctor.revenue),
       },
     ],
   };

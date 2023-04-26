@@ -5,6 +5,11 @@ export const fetchApiUserDoctorsSelector = (state) => state.userSlice.data;
 
 // all patients
 export const fetchApiUserPatientsSelector = (state) => state.userSlice.patients;
+export const fetchApiDoctorByIdSelector = (state) => state.userSlice.doctorById;
+
+// btn clicked get doctor by id
+export const btnClickedFilterDoctorSelector = (state) =>
+  state.userSlice.btnClickedFilterDoctor;
 
 // all shifts
 export const fetchApiAllShiftsDoctorSelector = (state) =>
@@ -31,13 +36,17 @@ export const fetchApiViewProfileDoctorByIdSelector = (state) =>
 // all metric
 export const fetchApiAllMetricSelector = (state) => state.metricSlice.data;
 
-/* ---- Handle Selector ----- */
+// isLoading
+export const isLoadingFetchApiUserDoctorsSelector = (state) =>
+  state.userSlice.isLoading;
+export const isLoadingFetchApiAllShiftsDoctorSelector = (state) =>
+  state.shiftsSlice.isLoading;
+export const isLoadingFetchApiAllCreateDaysDoctorSelector = (state) =>
+  state.daysSlice.isLoading;
+export const isLoadingFetchApiAllMetric = (state) =>
+  state.metricSlice.isLoading;
 
-// Lọc ra tổng doanh thu cho từng bác sĩ
-export const filterPriceOfDoctor = createSelector(
-  fetchApiUserDoctorsSelector,
-  (listDoctor) => {}
-);
+/* ---- Handle Selector ----- */
 
 // Tổng bệnh nhân
 export const filterTotalPatients = createSelector(

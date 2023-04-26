@@ -54,10 +54,15 @@ const daysSlice = createSlice({
   initialState: {
     data: [],
     days: [],
+    isLoading: false,
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchApiAllCreateDaysDoctor.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(fetchApiAllCreateDaysDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.data = action.payload;
       })
       .addCase(fetchApiCreateDaysDoctor.fulfilled, (state, action) => {
