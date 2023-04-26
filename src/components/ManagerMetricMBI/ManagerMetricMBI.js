@@ -1,7 +1,7 @@
 // lib
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message, Modal } from "antd";
+import { Button, Form, Input, message, Modal, Select } from "antd";
 
 // me
 import "./ManagerMetricMBI.css";
@@ -22,7 +22,8 @@ function ManagerMetricMBI({ getToken }) {
 
   const metrics = useSelector(listMetricTypeMBI);
 
-  console.log("token bmi ->", getToken);
+  // console.log("token bmi ->", getToken);
+  console.log("metrics bmi ->", metrics);
 
   useEffect(() => {
     dispatch(fetchApiAllMetric());
@@ -48,11 +49,7 @@ function ManagerMetricMBI({ getToken }) {
           token: getToken,
         })
       );
-      message.success("Tạo thông báo thành công!");
       setShowModal(false);
-    } else {
-      message.error("Tạo thông báo không thành công!");
-      return;
     }
   };
 
@@ -109,6 +106,25 @@ function ManagerMetricMBI({ getToken }) {
             hasFeedback
           >
             <Input placeholder="Chỉ số kết thúc..." />
+          </Form.Item>
+
+          <Form.Item
+            name="gender"
+            rules={[
+              {
+                required: true,
+                message: "Bạn cần phải chọn giới tính.",
+              },
+            ]}
+            hasFeedback
+          >
+            <Select
+              options={[
+                { label: "Nam", value: 0 },
+                { label: "Nữ", value: 1 },
+              ]}
+              placeholder="Giới tính"
+            />
           </Form.Item>
 
           {/* Nội dung */}

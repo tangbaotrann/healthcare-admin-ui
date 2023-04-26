@@ -1,10 +1,14 @@
 // lib
 import { Table } from "antd";
+import { useSelector } from "react-redux";
 
 // me
 import TitleName from "../../TitleName/TitleName";
+import { listMetricTypeBlood } from "../../../redux/selector";
 
 function TableListBloodPressure() {
+  const metrics = useSelector(listMetricTypeBlood);
+  console.log("blood", metrics);
   // cols
   const cols = [
     {
@@ -14,15 +18,15 @@ function TableListBloodPressure() {
       width: "4%",
     },
     {
-      key: "systolic",
+      key: "start",
       title: "Chỉ số tâm thu",
-      dataIndex: "systolic",
+      dataIndex: "start",
       width: "10%",
     },
     {
-      key: "diastole",
+      key: "end",
       title: "Chỉ số tâm trương",
-      dataIndex: "diastole",
+      dataIndex: "end",
       width: "10%",
     },
     {
@@ -44,16 +48,16 @@ function TableListBloodPressure() {
 
       <Table
         columns={cols}
-        // dataSource={metrics.map((metric, index) => ({
-        //   index: index + 1,
-        //   start: metric.start,
-        //   end: metric.end,
-        //   notification: metric.notification,
-        //   type: metric.type,
-        // }))}
+        dataSource={metrics.map((metric, index) => ({
+          index: index + 1,
+          start: metric.start,
+          end: metric.end,
+          notification: metric.notification,
+          type: metric.type,
+        }))}
         rowKey="index"
-        style={{ height: "280px" }}
-        scroll={{ y: 380 }}
+        // style={{ height: "280px" }}
+        // scroll={{ y: 380 }}
       ></Table>
     </>
   );

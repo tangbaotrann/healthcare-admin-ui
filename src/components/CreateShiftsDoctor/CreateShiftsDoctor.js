@@ -1,13 +1,21 @@
 //lib
-import { Button, Form, Input, message, Modal, TimePicker } from "antd";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { Button, Form, Input, Modal, TimePicker } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // me
 import "./CreateShiftsDoctor.css";
 import TitleName from "../TitleName";
-import { fetchApiCreateShiftsDoctor } from "../../redux/features/shiftsSlice";
+import {
+  fetchApiAllShiftsDoctor,
+  fetchApiCreateShiftsDoctor,
+} from "../../redux/features/shiftsSlice";
 import TableCreateShiftsDoctor from "../TableCreateShiftsDoctor";
+import {
+  fetchApiAllShiftsDoctorSelector,
+  filterCheckShifts,
+} from "../../redux/selector";
+import moment from "moment";
 
 // config select time
 const format = "HH:mm";
@@ -17,7 +25,16 @@ function CreateShiftsDoctor({ getToken }) {
 
   const dispatch = useDispatch();
 
-  console.log("getToken", getToken);
+  const shifts = useSelector(fetchApiAllShiftsDoctorSelector); // filterCheckShifts
+
+  // console.log("getToken", getToken);
+  console.log("shifts", shifts);
+
+  useEffect(() => {
+    dispatch(fetchApiAllShiftsDoctor());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // show modal
   const handleOpenModal = () => {
@@ -31,7 +48,12 @@ function CreateShiftsDoctor({ getToken }) {
 
   // handle create shifts doctor
   const handleCreateShiftsDoctor = (values) => {
+    console.log("values", values);
     if (values) {
+      // const timeStart = moment(values.time_start).format('HH:mm');
+      // ngày
+      // const scheduleDateStart = moment(schedule.date_compare._i.split('/').reverse().join('/') + ' ' + timeStart);
+
       dispatch(
         fetchApiCreateShiftsDoctor({
           values: values,
@@ -39,10 +61,6 @@ function CreateShiftsDoctor({ getToken }) {
         })
       );
       setShowModal(false);
-      message.success("Bạn đã tạo ca làm thành công cho Bác sĩ.");
-    } else {
-      message.error("Tạo ca làm không thành công!");
-      return;
     }
   };
 
@@ -146,7 +164,7 @@ function CreateShiftsDoctor({ getToken }) {
       </Modal>
 
       {/* List create shifts doctor */}
-      <TableCreateShiftsDoctor />
+      <TableCreateShiftsDoctor shifts={shifts} />
     </div>
   );
 }

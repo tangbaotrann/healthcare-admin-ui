@@ -1,27 +1,12 @@
 // lib
 import { Table } from "antd";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
 // me
 import "./TableCreateDaysDoctor.css";
 import TitleName from "../TitleName";
-import { fetchApiAllCreateDaysDoctorSelector } from "../../redux/selector";
-import { fetchApiAllCreateDaysDoctor } from "../../redux/features/daysSlice";
 
-function TableCreateDaysDoctor() {
-  const dispatch = useDispatch();
-
-  const days = useSelector(fetchApiAllCreateDaysDoctorSelector);
-
-  console.log("days", days);
-
-  useEffect(() => {
-    dispatch(fetchApiAllCreateDaysDoctor());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+function TableCreateDaysDoctor({ daysCreate }) {
   // cols
   const cols = [
     {
@@ -48,14 +33,14 @@ function TableCreateDaysDoctor() {
 
       <Table
         columns={cols}
-        dataSource={days.map((day, index) => ({
+        dataSource={daysCreate.map((day, index) => ({
           _id: index + 1,
           day: moment(day.day).format("dddd"),
           // day_number: day.day_number,
         }))}
         rowKey="_id"
-        style={{ height: "100px" }}
-        scroll={{ y: 360 }}
+        // style={{ height: "100px" }}
+        // scroll={{ y: 360 }}
       ></Table>
     </>
   );

@@ -35,6 +35,11 @@ function TableListMetricGlycemic() {
       dataIndex: "notification",
     },
     {
+      key: "case_gly",
+      title: "Trường hợp",
+      dataIndex: "case_gly",
+    },
+    {
       key: "type",
       title: "Loại chỉ số",
       dataIndex: "type",
@@ -53,11 +58,17 @@ function TableListMetricGlycemic() {
           start: metric.start,
           end: metric.end,
           notification: metric.notification,
+          case_gly:
+            metric.case_gly === 1
+              ? "Trước bữa ăn"
+              : metric.case_gly === 2
+              ? "Sau bữa ăn"
+              : "Trước lúc ngủ",
           type: metric.type,
         }))}
         rowKey="index"
-        style={{ height: "280px" }}
-        scroll={{ y: 380 }}
+        // style={{ height: "280px" }}
+        // scroll={{ y: 380 }}
       ></Table>
     </>
   );

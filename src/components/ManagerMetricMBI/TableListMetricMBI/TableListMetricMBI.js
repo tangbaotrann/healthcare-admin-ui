@@ -50,8 +50,8 @@ function TableListMetricMBI({ metrics }) {
           type: metric.type,
         }))}
         rowKey="index"
-        style={{ height: "280px" }}
-        scroll={{ y: 380 }}
+        // style={{ height: "280px" }}
+        // scroll={{ y: 380 }}
       ></Table>
     </>
   );

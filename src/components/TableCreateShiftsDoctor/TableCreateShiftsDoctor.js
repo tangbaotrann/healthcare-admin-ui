@@ -1,28 +1,12 @@
 // lib
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Table } from "antd";
 import moment from "moment";
 
 // me
 import "./TableCreateShiftsDoctor.css";
 import TitleName from "../TitleName";
-import { fetchApiAllShiftsDoctor } from "../../redux/features/shiftsSlice";
-import { fetchApiAllShiftsDoctorSelector } from "../../redux/selector";
 
-function TableCreateShiftsDoctor() {
-  const dispatch = useDispatch();
-
-  const shifts = useSelector(fetchApiAllShiftsDoctorSelector);
-
-  // console.log("shifts", shifts);
-
-  useEffect(() => {
-    dispatch(fetchApiAllShiftsDoctor());
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+function TableCreateShiftsDoctor({ shifts }) {
   // cols
   const cols = [
     {
@@ -52,6 +36,11 @@ function TableCreateShiftsDoctor() {
       title: "Thời gian kết thúc ca làm",
       dataIndex: "time_end",
     },
+    {
+      key: "shift_day",
+      title: "Ngày làm",
+      dataIndex: "shift_day",
+    },
   ];
 
   return (
@@ -67,10 +56,11 @@ function TableCreateShiftsDoctor() {
           time_end: moment(shift.time_end).format("h:mm a"),
           time_start: moment(shift.time_start).format("h:mm a"),
           _id: index + 1,
+          shift_day: moment(shift.time_end).format("DD/MM/YYYY"),
         }))}
         rowKey="_id"
-        style={{ height: "100px" }}
-        scroll={{ y: 360 }}
+        // style={{ height: "100px" }}
+        // scroll={{ y: 360 }}
       ></Table>
     </>
   );

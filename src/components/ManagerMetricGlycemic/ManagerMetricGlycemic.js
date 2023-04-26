@@ -1,12 +1,15 @@
 // lib
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Form, Input, message, Modal } from "antd";
+import { Button, Form, Input, message, Modal, Select } from "antd";
 
 // me
 import "./ManagerMetricGlycemic.css";
 import TitleName from "../TitleName";
-import { fetchApiMetricGlycemic } from "../../redux/features/metricSlice";
+import {
+  fetchApiAllMetric,
+  fetchApiMetricGlycemic,
+} from "../../redux/features/metricSlice";
 import TableListMetricGlycemic from "./TableListMetricGlycemic/TableListMetricGlycemic";
 
 const { TextArea } = Input;
@@ -16,7 +19,7 @@ function ManagerMetricGlycemic({ getToken }) {
 
   const dispatch = useDispatch();
 
-  console.log("token glycemic ->", getToken);
+  // console.log("token glycemic ->", getToken);
 
   // show modal
   const handleOpenModal = () => {
@@ -28,6 +31,11 @@ function ManagerMetricGlycemic({ getToken }) {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    dispatch(fetchApiAllMetric());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // handle submit
   const handleOnFishSendNotification = (values) => {
     if (values) {
@@ -38,10 +46,6 @@ function ManagerMetricGlycemic({ getToken }) {
         })
       );
       setShowModal(false);
-      message.success("Tạo thông báo thành công.");
-    } else {
-      message.error("Tạo thông báo không thành công!");
-      return;
     }
   };
 
@@ -98,6 +102,26 @@ function ManagerMetricGlycemic({ getToken }) {
             hasFeedback
           >
             <Input placeholder="Chỉ số kết thúc..." />
+          </Form.Item>
+
+          <Form.Item
+            name="case_gly"
+            rules={[
+              {
+                required: true,
+                message: "Bạn cần phải nhập nội dung.",
+              },
+            ]}
+            hasFeedback
+          >
+            <Select
+              options={[
+                { label: "Trước bữa ăn", value: 1 },
+                { label: "Sau bữa ăn", value: 2 },
+                { label: "Trước khi ngủ", value: 3 },
+              ]}
+              placeholder="Lựa chọn"
+            />
           </Form.Item>
 
           {/* Nội dung */}

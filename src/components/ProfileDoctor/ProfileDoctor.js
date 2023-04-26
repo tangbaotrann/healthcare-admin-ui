@@ -42,7 +42,7 @@ function ProfileDoctor({ getToken }) {
         token: getToken,
       })
     );
-    message.error("Bạn đã từ chối duyệt tài khoản cho Bác sĩ này!");
+    message.success("Bạn đã từ chối duyệt tài khoản cho Bác sĩ này!");
   };
 
   return (
@@ -51,6 +51,13 @@ function ProfileDoctor({ getToken }) {
 
       {/* info profile doctor */}
       <div className="view-profile-doctor-container">
+        <div style={{ margin: "0 auto" }}>
+          <img
+            className="acc-list-avatar-doctor"
+            src={viewProfileDoctor?.doctor?.person?.avatar}
+            alt="avatar-doctor"
+          />
+        </div>
         <p>
           <b>- Chuyên gia:</b> {viewProfileDoctor.specialist?.join("")}
         </p>

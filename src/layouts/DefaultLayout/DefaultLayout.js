@@ -17,6 +17,7 @@ import constants from "../../utils/constants";
 import layoutSlice from "../../redux/features/layoutSlice";
 import ParticlesBackground from "../../components/ParticlesBackground";
 import { logo } from "../../asset/images";
+import { fetchApiAllMetric } from "../../redux/features/metricSlice";
 
 const { Header, Sider, Content } = Layout;
 
@@ -104,8 +105,10 @@ function DefaultLayout({ children }) {
             } else if (item.key === constants.layoutMetricTypeMBI) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === constants.layoutMetricTypeGlycemic) {
+              // dispatch(dispatch(fetchApiAllMetric()));
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === constants.layoutMetricTypeBloodPressure) {
+              // dispatch(dispatch(fetchApiAllMetric()));
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             }
           }}

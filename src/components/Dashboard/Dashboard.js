@@ -8,26 +8,45 @@ import Statistics from "./Statistics";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchApiUserDoctorsSelector,
-  fetchApiUserPatientsSelector,
+  filterTotalAccountAwaiting,
+  filterTotalDoctors,
+  filterTotalPatients,
+  filterTotalPriceOfAllDoctor,
+  totalShifts,
 } from "../../redux/selector";
 import { useEffect } from "react";
 import {
   fetchApiUserDoctors,
   fetchApiUserPatients,
 } from "../../redux/features/userSlice";
+import { fetchApiAllShiftsDoctor } from "../../redux/features/shiftsSlice";
 
 function Dashboard() {
-  const totalDoctors = useSelector(fetchApiUserDoctorsSelector);
-  const totalPatients = useSelector(fetchApiUserPatientsSelector);
+  const doctors = useSelector(fetchApiUserDoctorsSelector);
+  const totalPrice = useSelector(filterTotalPriceOfAllDoctor);
+  const totalDoctors = useSelector(filterTotalDoctors);
+  const totalShift = useSelector(totalShifts);
+  const totalAccountAwaiting = useSelector(filterTotalAccountAwaiting);
+  const totalPatients = useSelector(filterTotalPatients);
 
   const dispatch = useDispatch();
 
-  console.log("totalDoctors", totalDoctors);
-  console.log("totalPatients", totalPatients);
+  console.log("doctors", doctors);
+  // console.log("totalPrice", totalPrice);
+  // console.log("totalPatients", totalPatients);
+  // console.log("totalShift", totalShift);
+  // console.log("totalAccountAwaiting", totalAccountAwaiting);
+  // console.log("totalPatients", totalPatients);
+
+  useEffect(() => {
+    dispatch(fetchApiAllShiftsDoctor());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(fetchApiUserDoctors());
   }, []);
+
   useEffect(() => {
     dispatch(fetchApiUserPatients());
   }, []);
@@ -41,14 +60,14 @@ function Dashboard() {
       <div className="dashboard-container">
         {/* Left */}
         <div className="dashboard-container-left">
-          <CardItem totalDoctors={totalDoctors} />
-          <Statistics />
+          <CardItem
+            totalDoctors={totalDoctors}
+            totalPatients={totalPatients}
+            totalShift={totalShift}
+            totalAccountAwaiting={totalAccountAwaiting}
+          />
+          <Statistics totalPrice={totalPrice} doctors={doctors} />
         </div>
-
-        {/* Right */}
-        {/* <div className="dashboard-container-right">
-                    <h1>Right</h1>
-                </div> */}
       </div>
     </div>
   );

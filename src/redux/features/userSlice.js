@@ -76,7 +76,15 @@ export const fetchApiUserDoctors = createAsyncThunk(
   "user/fetchApiUserDoctors",
   async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}doctors`);
+      const getToken = JSON.parse(localStorage.getItem("token_user_login"));
+
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}doctors`, {
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          Authorization: `Bearer ${getToken}`,
+          ContentType: "application/json",
+        },
+      });
 
       return res.data.data;
     } catch (err) {
@@ -91,13 +99,44 @@ export const fetchApiUserPatients = createAsyncThunk(
   async () => {
     try {
       const getToken = JSON.parse(localStorage.getItem("token_user_login"));
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}patients`, {
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          Authorization: `Bearer ${getToken}`,
-          ContentType: "application/json",
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}patients/admin`,
+        {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${getToken}`,
+            ContentType: "application/json",
+          },
+        }
+      );
+
+      console.log("res all patient", res.data.data);
+
+      return res.data.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
+// find patient by id
+export const fetchApiPatientById = createAsyncThunk(
+  "user/fetchApiPatientById",
+  async (idPatient) => {
+    try {
+      const getToken = JSON.parse(localStorage.getItem("token_user_login"));
+
+      const res = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/patients/${idPatient}`,
+        {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${getToken}`,
+            ContentType: "application/json",
+          },
+        }
+      );
+      console.log("res patient by id", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -145,7 +184,7 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
   async ({ account_id, deleted, token }) => {
     try {
       const res = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}rules/doctors/${account_id}`,
+        `${process.env.REACT_APP_BASE_URL}rules/doctor/${account_id}`,
         { deleted: deleted },
         {
           headers: {
@@ -156,9 +195,9 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
         }
       );
 
-      console.log("res del ->", res.data);
+      console.log("res del ->", res.data.data);
 
-      return res.data;
+      return res.data.data;
     } catch (err) {
       console.log({ err });
     }

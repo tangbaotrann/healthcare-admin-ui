@@ -21,3 +21,10 @@
     margin: 0;
     margin-bottom: 12px;
 }
+
+.acc-list-avatar-doctor {
+    width: 62px;
+    height: 62px;
+    border-radius: 12px;
+    object-fit: cover;
+}

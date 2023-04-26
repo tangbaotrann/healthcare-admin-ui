@@ -18,9 +18,9 @@
 
 /* Card Header */
 .card-item-header {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--black);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .card-item-header-title {
@@ -42,7 +42,7 @@
 .card-item-footer-type {
     text-align: center;
     margin: 0 auto;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--black);
     /* margin-top: 2px; */

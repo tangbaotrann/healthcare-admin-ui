@@ -1,16 +1,20 @@
 // lib
 import { Button, Form, Input, Modal, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 // me
 import "./ManagerBloodPressure.css";
 import TitleName from "../TitleName";
 import TableListBloodPressure from "./TableListBloodPressure";
+import {
+  fetchApiAllMetric,
+  fetchApiMetricBlood,
+} from "../../redux/features/metricSlice";
 
 const { TextArea } = Input;
 
-function ManagerBloodPressure() {
+function ManagerBloodPressure({ getToken }) {
   const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -25,20 +29,22 @@ function ManagerBloodPressure() {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    dispatch(fetchApiAllMetric());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // handle submit
   const handleOnFishSendNotification = (values) => {
     console.log("values", values);
     if (values) {
-      //   dispatch();
-      // fetchApiMetricGlycemic({
-      //   values: values,
-      //   token: getToken,
-      // })
+      dispatch(
+        fetchApiMetricBlood({
+          values: values,
+          token: getToken,
+        })
+      );
       setShowModal(false);
-      message.success("Tạo thông báo thành công.");
-    } else {
-      message.error("Tạo thông báo không thành công!");
-      return;
     }
   };
 
@@ -65,36 +71,36 @@ function ManagerBloodPressure() {
           fields={[
             {
               name: ["type"],
-              value: "BLOOD_PRESSURE",
+              value: "BLOOD",
             },
           ]}
         >
           {/* Chỉ số systolic */}
           <Form.Item
-            name="systolic"
+            name="start"
             rules={[
               {
                 required: true,
-                message: "Bạn cần phải nhập chỉ số tâm thu.",
+                message: "Bạn cần phải nhập chỉ số bắt đầu.", // "Bạn cần phải nhập chỉ số tâm thu.",
               },
             ]}
             hasFeedback
           >
-            <Input placeholder="Chỉ số tâm thu..." />
+            <Input placeholder="Chỉ số bắt đầu..." />
           </Form.Item>
 
           {/* Chỉ số diastole */}
           <Form.Item
-            name="diastole"
+            name="end"
             rules={[
               {
                 required: true,
-                message: "Bạn cần phải nhập chỉ số tâm trương.",
+                message: "Bạn cần phải nhập chỉ số kết thúc.", //"Bạn cần phải nhập chỉ số tâm trương.",
               },
             ]}
             hasFeedback
           >
-            <Input placeholder="Chỉ số tâm trương..." />
+            <Input placeholder="Chỉ số kết thúc..." />
           </Form.Item>
 
           {/* Nội dung */}

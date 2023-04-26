@@ -4,6 +4,7 @@
 }
 
 .dashboard-container {
+    height: 80vh !important;
     display: flex;
     align-items: center;
     margin-top: 10px;

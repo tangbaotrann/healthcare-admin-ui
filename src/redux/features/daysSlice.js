@@ -1,13 +1,14 @@
 // lib
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { message } from "antd";
 import axios from "axios";
 
 // fetch api create day doctor
 export const fetchApiCreateDaysDoctor = createAsyncThunk(
   "days/fetchApiCreateDaysDoctor",
   async ({ dateFormat, weekDay, token }) => {
-    console.log("dateFormat", dateFormat);
-    console.log("weekDay", weekDay);
+    // console.log("dateFormat", dateFormat);
+    // console.log("weekDay", weekDay);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}days`,
@@ -23,10 +24,13 @@ export const fetchApiCreateDaysDoctor = createAsyncThunk(
           },
         }
       );
+      message.success("Bạn đã tạo thành công ngày làm cho Bác sĩ.");
 
       return res.data;
     } catch (err) {
       console.log({ err });
+      message.error(`${err.response.data.message}`);
+      return;
     }
   }
 );
@@ -57,7 +61,9 @@ const daysSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchApiCreateDaysDoctor.fulfilled, (state, action) => {
-        state.days = action.payload;
+        if (action.payload) {
+          state.data.push(action.payload);
+        }
       });
   },
 });

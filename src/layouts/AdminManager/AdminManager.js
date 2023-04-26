@@ -32,7 +32,7 @@ function AdminManager({ getToken }) {
       ) : changeLayout === constants.layoutMetricTypeGlycemic ? (
         <ManagerMetricGlycemic getToken={getToken} />
       ) : changeLayout === constants.layoutMetricTypeBloodPressure ? (
-        <ManagerBloodPressure />
+        <ManagerBloodPressure getToken={getToken} />
       ) : null}
     </DefaultLayout>
   );

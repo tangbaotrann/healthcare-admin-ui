@@ -1,23 +1,36 @@
 //lib
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Modal, Select } from "antd";
 
 // me
 import "./CreateDaysDoctor.css";
 import TitleName from "../TitleName";
-import { fetchApiCreateDaysDoctor } from "../../redux/features/daysSlice";
+import {
+  fetchApiAllCreateDaysDoctor,
+  fetchApiCreateDaysDoctor,
+} from "../../redux/features/daysSlice";
 import TableCreateDaysDoctor from "../TableCreateDaysDoctor";
 import days from "../../utils/days";
+import { fetchApiAllCreateDaysDoctorSelector } from "../../redux/selector";
 
 function CreateDaysDoctor({ getToken }) {
   const [showModal, setShowModal] = useState(false);
   const [weekDay, setWeekDay] = useState("");
 
   // console.log("weekDay", weekDay);
-  console.log("getToken create day", getToken);
+  // console.log("getToken create day", getToken);
 
   const dispatch = useDispatch();
+
+  const daysCreate = useSelector(fetchApiAllCreateDaysDoctorSelector);
+
+  console.log("daysCreate", daysCreate);
+
+  useEffect(() => {
+    dispatch(fetchApiAllCreateDaysDoctor());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // show modal
   const handleOpenModal = () => {
@@ -47,10 +60,6 @@ function CreateDaysDoctor({ getToken }) {
         })
       );
       setShowModal(false);
-      message.success("Bạn đã tạo thành công ngày làm cho Bác sĩ.");
-    } else {
-      message.error("Tạo ngày làm không thành công!");
-      return;
     }
   };
 
@@ -151,7 +160,7 @@ function CreateDaysDoctor({ getToken }) {
       </Modal>
 
       {/* List days */}
-      <TableCreateDaysDoctor />
+      <TableCreateDaysDoctor daysCreate={daysCreate} />
     </div>
   );
 }

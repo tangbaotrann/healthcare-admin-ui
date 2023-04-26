@@ -5,7 +5,7 @@ import * as echarts from "echarts";
 // me
 import "./StatisticsChart.css";
 
-function StatisticsChart() {
+function StatisticsChart({ doctors }) {
   // option
   const option = {
     color: ["#FE4C00"],
@@ -34,7 +34,12 @@ function StatisticsChart() {
       {
         type: "category",
         boundaryGap: false,
-        data: ["Mon", "Tue", "Web", "Thu", "Fri", "Sat", "Sun"],
+        data: doctors
+          ?.filter(
+            (__doctor) =>
+              __doctor.is_accepted === true && __doctor.deleted === false
+          )
+          ?.map((_doctor) => _doctor.person.username),
       },
     ],
     yAxis: [
@@ -67,7 +72,7 @@ function StatisticsChart() {
           focus: "series",
         },
         showSymbol: false,
-        data: [28000, 19000, 320000, 180000, 410000, 300000, 260000],
+        data: doctors.map((_doctor) => _doctor.revenue),
       },
     ],
   };
@@ -78,7 +83,9 @@ function StatisticsChart() {
 
       <div className="statistics-chart-note-text">
         <p className="statistics-chart-note-text-title">Biểu đồ: </p>
-        <p className="statistics-chart-note-text-desc">Thống kê ...</p>
+        <p className="statistics-chart-note-text-desc">
+          Thống kê tổng doanh thu của các bác sĩ
+        </p>
       </div>
     </div>
   );
