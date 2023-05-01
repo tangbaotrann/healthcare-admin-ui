@@ -9,6 +9,7 @@ import AdminManager from "./layouts/AdminManager/AdminManager";
 import Register from "./pages/Register/Register";
 import { useEffect, useState } from "react";
 import { fetchApiLoginSelector } from "./redux/selector";
+import ConfirmAdmin from "./pages/ConfirmAdmin/ConfirmAdmin";
 
 function App() {
   const [getToken, setGetToken] = useState();
@@ -17,13 +18,14 @@ function App() {
   const messageSuccess = useSelector(fetchApiLoginSelector);
 
   // console.log("getToken - app router", getToken);
-  console.log("messageSuccess - app router", messageSuccess);
-  console.log("getToken - app router", getToken);
+  // console.log("messageSuccess - app router", messageSuccess);
+  // console.log("getToken - app router", getToken);
 
   useEffect(() => {
     const getToken = JSON.parse(localStorage.getItem("token_user_login"));
-
-    setGetToken(getToken);
+    messageSuccess?.accessToken
+      ? setGetToken(messageSuccess.accessToken)
+      : setGetToken(getToken);
   }, [messageSuccess?.accessToken]);
 
   return (
@@ -50,6 +52,8 @@ function App() {
           path={endPoints.admin}
           element={<AdminManager getToken={getToken} />}
         />
+        {/* Admin confirm */}
+        <Route path={endPoints.adminConfirm} element={<ConfirmAdmin />} />
       </Routes>
     </BrowserRouter>
   );

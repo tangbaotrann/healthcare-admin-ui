@@ -49,13 +49,12 @@ function Statistics({ totalPrice, doctors }) {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <Select
             style={{ width: "220px" }}
             onChange={handleChange}
             defaultValue="all"
           >
-            {/* <Select.Option value="all">Tất cả</Select.Option> */}
             {doctors
               ?.filter(
                 (__doctor) =>
@@ -69,7 +68,7 @@ function Statistics({ totalPrice, doctors }) {
                 );
               })}
           </Select>
-        </div>
+        </div> */}
 
         {/* <div className="overview-statistics-item">
           <p className="item-side-top">Items</p>

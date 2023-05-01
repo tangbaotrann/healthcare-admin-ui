@@ -8,6 +8,7 @@ import "./Dashboard.css";
 import Statistics from "./Statistics";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchApiLoginSelector,
   fetchApiUserDoctorsSelector,
   filterTotalAccountAwaiting,
   filterTotalDoctors,
@@ -32,11 +33,14 @@ function Dashboard() {
   const totalAccountAwaiting = useSelector(filterTotalAccountAwaiting);
   const totalPatients = useSelector(filterTotalPatients);
 
+  // const messageSuccess = useSelector(fetchApiLoginSelector);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  console.log("doctors", doctors);
+  // console.log("messageSuccess", messageSuccess);
+  // console.log("doctors", doctors);
   // console.log("totalPrice", totalPrice);
   // console.log("totalPatients", totalPatients);
   // console.log("totalShift", totalShift);

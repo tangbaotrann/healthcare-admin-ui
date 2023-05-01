@@ -21,12 +21,12 @@ export const fetchApiLogin = createAsyncThunk(
       );
       // console.log(res.data.data);
 
-      localStorage.setItem(
-        "token_user_login",
-        JSON.stringify(res.data.data.accessToken)
-      );
+      // localStorage.setItem(
+      //   "token_user_login",
+      //   JSON.stringify(res.data.data.accessToken)
+      // );
 
-      console.log("login ->", res.data);
+      console.log("login ->", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -259,10 +259,14 @@ const userSlice = createSlice({
     doctorById: [],
     isLoading: false,
     btnClickedFilterDoctor: null,
+    btnClickedGetPhoneNumber: null,
   },
   reducers: {
     getIdAccountDoctor: (state, action) => {
       state.btnClickGetIdAccountDoctor = action.payload;
+    },
+    btnClickedGetPhone: (state, action) => {
+      state.btnClickedGetPhoneNumber = action.payload;
     },
   },
   extraReducers: (builder) => {

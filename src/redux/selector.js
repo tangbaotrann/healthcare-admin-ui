@@ -4,6 +4,10 @@ import { createSelector } from "@reduxjs/toolkit";
 export const fetchApiLoginSelector = (state) => state.userSlice.login;
 export const isLoadingLoginSelector = (state) => state.userSlice.isLoading;
 
+// get phone clicked
+export const btnClickedGetPhoneNumberSelector = (state) =>
+  state.userSlice.btnClickedGetPhoneNumber;
+
 // all user
 export const fetchApiUserDoctorsSelector = (state) => state.userSlice.data;
 

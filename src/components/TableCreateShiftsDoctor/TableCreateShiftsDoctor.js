@@ -50,17 +50,19 @@ function TableCreateShiftsDoctor({ shifts }) {
       {/* Table list */}
       <Table
         columns={cols}
-        dataSource={shifts.map((shift, index) => ({
-          desc: shift.desc,
-          name: shift.name,
-          time_end: moment(shift.time_end).format("h:mm a"),
-          time_start: moment(shift.time_start).format("h:mm a"),
-          _id: index + 1,
-          shift_day: moment(shift.time_end).format("DD/MM/YYYY"),
-        }))}
+        dataSource={
+          shifts?.length > 0
+            ? shifts.map((shift, index) => ({
+                desc: shift.desc,
+                name: shift.name,
+                time_end: moment(shift.time_end).format("h:mm a"),
+                time_start: moment(shift.time_start).format("h:mm a"),
+                _id: index + 1,
+                shift_day: moment(shift.time_end).format("DD/MM/YYYY"),
+              }))
+            : ""
+        }
         rowKey="_id"
-        // style={{ height: "100px" }}
-        // scroll={{ y: 360 }}
       ></Table>
     </>
   );

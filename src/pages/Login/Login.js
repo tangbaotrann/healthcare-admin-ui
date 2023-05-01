@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { endPoints } from "../../routers";
 import BackgroundOutSite from "../../components/BackgroundOutSite/BackgroundOutSite";
-import { fetchApiLogin } from "../../redux/features/userSlice";
+import userSlice, { fetchApiLogin } from "../../redux/features/userSlice";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { parsePhoneNumber } from "react-phone-number-input";
 import axios from "axios";
@@ -38,10 +38,18 @@ function Login() {
   useEffect(() => {
     if (ruleAccount.rule === "admin") {
       if (messageSuccess.length > 0 || messageSuccess.accessToken) {
-        navigate(`${endPoints.admin}`);
+        navigate(`${endPoints.adminConfirm}`);
+        dispatch(userSlice.actions.btnClickedGetPhone(number));
       }
     }
-  }, [messageSuccess.accessToken]);
+  }, [
+    dispatch,
+    messageSuccess.accessToken,
+    messageSuccess.length,
+    navigate,
+    number,
+    ruleAccount.rule,
+  ]);
 
   // handle submit login
   const handleOnFishSubmitLogin = (values) => {
@@ -69,7 +77,7 @@ function Login() {
 
             if (res.data.data === "admin") {
               if (messageSuccess.accessToken) {
-                navigate(`${endPoints.admin}`);
+                navigate(`${endPoints.adminConfirm}`);
               }
               if (messageSuccess.status === "fail") {
                 return;
@@ -166,14 +174,7 @@ function Login() {
         </Form.Item>
 
         {/* Button */}
-        <Button
-          type="primary"
-          htmlType="submit"
-          className={`${
-            isLoading ? "disabled-btn-login" : "enabled-btn-login"
-          }`}
-          block
-        >
+        <Button type="primary" htmlType="submit" disabled={isLoading} block>
           {isLoading ? <LoadingOutlined spin /> : "Đăng nhập"}
         </Button>
 
