@@ -31,8 +31,16 @@
     border: none;
 }
 
-
 .PhoneInputInput:focus {
     border: none;
     outline: none;
+}
+
+.disabled-btn-login {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.enabled-btn-login {
+    cursor: pointer;
 }

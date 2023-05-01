@@ -22,8 +22,8 @@ function ManagerMetricMBI({ getToken }) {
 
   const metrics = useSelector(listMetricTypeMBI);
 
-  // console.log("token bmi ->", getToken);
-  console.log("metrics bmi ->", metrics);
+  console.log("token bmi ->", getToken);
+  // console.log("metrics bmi ->", metrics);
 
   useEffect(() => {
     dispatch(fetchApiAllMetric());

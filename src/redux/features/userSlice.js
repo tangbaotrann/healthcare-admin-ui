@@ -4,7 +4,7 @@ import axios from "axios";
 // login
 export const fetchApiLogin = createAsyncThunk(
   "user/fetchApiLogin",
-  async (values) => {
+  async (values, { rejectWithValue }) => {
     try {
       const { phone_number, password } = values;
 
@@ -30,7 +30,9 @@ export const fetchApiLogin = createAsyncThunk(
 
       return res.data.data;
     } catch (err) {
-      console.log({ err });
+      const message = err.response.data;
+      console.log(message);
+      return rejectWithValue(message);
     }
   }
 );
@@ -268,12 +270,33 @@ const userSlice = createSlice({
       .addCase(fetchApiDoctorById.fulfilled, (state, action) => {
         state.doctorById = action.payload;
       })
+      .addCase(fetchApiLogin.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(fetchApiLogin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.login = action.payload;
+      })
+      .addCase(fetchApiLogin.rejected, (state, action) => {
+        state.isLoading = false;
         state.login = action.payload;
       })
       .addCase(fetchApiRegister.fulfilled, (state, action) => {
         state.register = action.payload;
       })
+      // del account
+      .addCase(
+        fetchApiDeleteAwaitBrowsingRuleForDoctor.fulfilled,
+        (state, action) => {
+          const _update = state.data.findIndex(
+            (_account) => _account._id === action.payload._id
+          );
+
+          if (_update > -1) {
+            state.data.splice(_update, 1);
+          }
+        }
+      )
       .addCase(fetchApiUserDoctors.pending, (state, action) => {
         state.isLoading = true;
       })
@@ -284,6 +307,14 @@ const userSlice = createSlice({
       .addCase(
         fetchApiAwaitBrowsingRuleForDoctor.fulfilled,
         (state, action) => {
+          const _update = state.data.findIndex(
+            (_account) => _account._id === action.payload._id
+          );
+
+          if (_update > -1) {
+            state.data.splice(_update, 1);
+          }
+
           state.await = action.payload;
         }
       )

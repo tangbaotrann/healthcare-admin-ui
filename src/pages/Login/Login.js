@@ -1,10 +1,10 @@
 // lib
-import { KeyOutlined } from "@ant-design/icons/lib/icons";
+import { KeyOutlined, LoadingOutlined } from "@ant-design/icons/lib/icons";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { Form, Input, Button } from "antd";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { Form, Input, Button, Alert } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 // me
@@ -12,20 +12,82 @@ import "./Login.css";
 import { endPoints } from "../../routers";
 import BackgroundOutSite from "../../components/BackgroundOutSite/BackgroundOutSite";
 import { fetchApiLogin } from "../../redux/features/userSlice";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { parsePhoneNumber } from "react-phone-number-input";
+import axios from "axios";
+import {
+  fetchApiLoginSelector,
+  isLoadingLoginSelector,
+} from "../../redux/selector";
 
 function Login() {
   const [number, setNumber] = useState("");
+  const [messageError, setMessageError] = useState(false);
+  const [checkPhone, setCheckPhone] = useState(false);
+  const [ruleAccount, setRuleAccount] = useState({});
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
+  const messageSuccess = useSelector(fetchApiLoginSelector);
+  const isLoading = useSelector(isLoadingLoginSelector);
+
+  // console.log("messageSuccess", messageSuccess);
+
+  useEffect(() => {
+    if (ruleAccount.rule === "admin") {
+      if (messageSuccess.length > 0 || messageSuccess.accessToken) {
+        navigate(`${endPoints.admin}`);
+      }
+    }
+  }, [messageSuccess.accessToken]);
+
   // handle submit login
   const handleOnFishSubmitLogin = (values) => {
     try {
+      const validatorPhone = isValidPhoneNumber(values.phone_number);
+      const parsePhone = parsePhoneNumber(values.phone_number);
+
+      const formatPhone = parsePhone.number.replace("+84", "0");
+
+      if (validatorPhone === false) {
+        setCheckPhone(true);
+        setMessageError(false);
+        return;
+      }
+
       if (values) {
-        dispatch(fetchApiLogin(values));
-        navigate(`${endPoints.admin}`);
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}accounts/phone/${formatPhone}`)
+          .then((res) => {
+            console.log("res login ->", res.data.data);
+
+            dispatch(fetchApiLogin(values));
+            setCheckPhone(false);
+            setMessageError(false);
+
+            if (res.data.data === "admin") {
+              if (messageSuccess.accessToken) {
+                navigate(`${endPoints.admin}`);
+              }
+              if (messageSuccess.status === "fail") {
+                return;
+              }
+            }
+
+            setRuleAccount(res.data.data);
+          })
+          .catch((err) => {
+            if (validatorPhone === false) {
+              setCheckPhone(true);
+              setMessageError(false);
+            } else {
+              setMessageError(true);
+              setCheckPhone(false);
+            }
+            console.log({ err });
+          });
       }
     } catch (err) {
       console.log({ err });
@@ -34,6 +96,30 @@ function Login() {
 
   return (
     <BackgroundOutSite>
+      {(messageSuccess.length > 0 || messageSuccess.status === "fail") &&
+      !messageError &&
+      !checkPhone ? (
+        <Alert
+          message={`${messageSuccess.message}`}
+          type="error"
+          style={{ marginBottom: "12px" }}
+        />
+      ) : null}
+
+      {messageError ? (
+        <Alert
+          message="Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại!"
+          type="error"
+          style={{ marginBottom: "12px" }}
+        />
+      ) : checkPhone ? (
+        <Alert
+          message="Số điện thoại của bạn không hợp lệ. Vui lòng thử lại!"
+          type="error"
+          style={{ marginBottom: "12px" }}
+        />
+      ) : null}
+
       <Form
         onFinish={handleOnFishSubmitLogin}
         onFinishFailed={(error) => {
@@ -80,8 +166,15 @@ function Login() {
         </Form.Item>
 
         {/* Button */}
-        <Button type="primary" htmlType="submit" block>
-          Đăng nhập
+        <Button
+          type="primary"
+          htmlType="submit"
+          className={`${
+            isLoading ? "disabled-btn-login" : "enabled-btn-login"
+          }`}
+          block
+        >
+          {isLoading ? <LoadingOutlined spin /> : "Đăng nhập"}
         </Button>
 
         {/* Register & Forgot-password button */}

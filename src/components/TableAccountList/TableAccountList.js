@@ -111,7 +111,7 @@ function TableAccountList({ getToken }) {
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
       >
-        <ProfileDoctor getToken={getToken} />
+        <ProfileDoctor getToken={getToken} handleCancel={handleCancel} />
       </Modal>
     </>
   );

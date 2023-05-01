@@ -10,7 +10,7 @@ import userSlice, {
   fetchApiDeleteAwaitBrowsingRuleForDoctor,
 } from "../../redux/features/userSlice";
 
-function ProfileDoctor({ getToken }) {
+function ProfileDoctor({ getToken, handleCancel }) {
   const viewProfileDoctor = useSelector(fetchApiViewProfileDoctorByIdSelector);
 
   console.log("viewProfileDoctor", viewProfileDoctor);
@@ -20,29 +20,39 @@ function ProfileDoctor({ getToken }) {
 
   // handle Await Browsing Doctor
   const handleAwaitBrowsingDoctor = () => {
-    dispatch(
-      userSlice.actions.getIdAccountDoctor(viewProfileDoctor.doctor._id)
-    );
-    dispatch(
-      fetchApiAwaitBrowsingRuleForDoctor({
-        account_id: viewProfileDoctor.doctor._id,
-        is_accepted: true,
-        token: getToken,
-      })
-    );
-    message.success("Bạn đã duyệt tài khoản cho Bác sĩ này thành công!");
+    if (getToken) {
+      dispatch(
+        userSlice.actions.getIdAccountDoctor(viewProfileDoctor.doctor._id)
+      );
+      dispatch(
+        fetchApiAwaitBrowsingRuleForDoctor({
+          account_id: viewProfileDoctor.doctor._id,
+          is_accepted: true,
+          token: getToken,
+        })
+      );
+      message.success("Bạn đã duyệt tài khoản cho Bác sĩ này thành công!");
+      handleCancel();
+    } else {
+      message.error("Duyệt tài khoản không thành công!");
+    }
   };
 
   // handle delete await browsing doctor
   const handleDeleteAwaitBrowsingDoctor = () => {
-    dispatch(
-      fetchApiDeleteAwaitBrowsingRuleForDoctor({
-        account_id: viewProfileDoctor.doctor._id,
-        deleted: true,
-        token: getToken,
-      })
-    );
-    message.success("Bạn đã từ chối duyệt tài khoản cho Bác sĩ này!");
+    if (getToken) {
+      dispatch(
+        fetchApiDeleteAwaitBrowsingRuleForDoctor({
+          account_id: viewProfileDoctor.doctor._id,
+          deleted: true,
+          token: getToken,
+        })
+      );
+      message.success("Bạn đã từ chối duyệt tài khoản cho Bác sĩ này!");
+      handleCancel();
+    } else {
+      message.error("Từ chối duyệt tài khoản không thành công!");
+    }
   };
 
   return (

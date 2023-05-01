@@ -19,7 +19,7 @@ function ManagerMetricGlycemic({ getToken }) {
 
   const dispatch = useDispatch();
 
-  // console.log("token glycemic ->", getToken);
+  console.log("token glycemic ->", getToken);
 
   // show modal
   const handleOpenModal = () => {

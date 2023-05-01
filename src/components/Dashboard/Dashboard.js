@@ -1,6 +1,7 @@
 // lib
 import moment from "moment";
 import CardItem from "./CardItem";
+import { useNavigate } from "react-router-dom";
 
 // me
 import "./Dashboard.css";
@@ -20,8 +21,10 @@ import {
   fetchApiUserPatients,
 } from "../../redux/features/userSlice";
 import { fetchApiAllShiftsDoctor } from "../../redux/features/shiftsSlice";
+import { endPoints } from "../../routers";
 
 function Dashboard() {
+  const checkToken = localStorage.getItem("token_user_login");
   const doctors = useSelector(fetchApiUserDoctorsSelector);
   const totalPrice = useSelector(filterTotalPriceOfAllDoctor);
   const totalDoctors = useSelector(filterTotalDoctors);
@@ -31,12 +34,18 @@ function Dashboard() {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   console.log("doctors", doctors);
   // console.log("totalPrice", totalPrice);
   // console.log("totalPatients", totalPatients);
   // console.log("totalShift", totalShift);
   // console.log("totalAccountAwaiting", totalAccountAwaiting);
   // console.log("totalPatients", totalPatients);
+
+  useEffect(() => {
+    !checkToken && navigate(`${endPoints.login}`);
+  }, [checkToken]);
 
   useEffect(() => {
     dispatch(fetchApiAllShiftsDoctor());
@@ -48,8 +57,8 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchApiUserPatients());
-  }, []);
+    checkToken && dispatch(fetchApiUserPatients());
+  }, [checkToken]);
 
   return (
     <div className="dashboard-wrapper">

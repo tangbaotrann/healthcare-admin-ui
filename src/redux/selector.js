@@ -1,5 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 
+// login
+export const fetchApiLoginSelector = (state) => state.userSlice.login;
+export const isLoadingLoginSelector = (state) => state.userSlice.isLoading;
+
 // all user
 export const fetchApiUserDoctorsSelector = (state) => state.userSlice.data;
 
