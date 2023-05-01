@@ -4,8 +4,12 @@ import * as echarts from "echarts";
 
 // me
 import "./StatisticsChart.css";
+import moment from "moment";
 
-function StatisticsChart({ doctors }) {
+function StatisticsChart({ doctors, filterChartOfDoctor }) {
+  console.log("filterChartOfDoctor", filterChartOfDoctor);
+  // console.log("filterChartOfDoctor", [filterChartOfDoctor.revenue]);
+
   // option
   const option = {
     color: ["#FE4C00"],
@@ -34,12 +38,22 @@ function StatisticsChart({ doctors }) {
       {
         type: "category",
         boundaryGap: false,
-        data: doctors
-          ?.filter(
-            (__doctor) =>
-              __doctor.is_accepted === true && __doctor.deleted === false
-          )
-          ?.map((_doctor) => _doctor.person.username),
+        data:
+          // filterChartOfDoctor[0] !== []
+          //   ? filterChartOfDoctor.map((__doctor) => {
+          //       // const _day = __doctor?.ratings?.map((_rating) =>
+          //       //   moment(_rating.createdAt).format("DD/MM/YYYY")
+          //       // );
+
+          //       // return _day;
+          //     })
+          //   :
+          doctors
+            ?.filter(
+              (__doctor) =>
+                __doctor.is_accepted === true && __doctor.deleted === false
+            )
+            ?.map((_doctor) => _doctor.person.username),
       },
     ],
     yAxis: [
@@ -72,7 +86,11 @@ function StatisticsChart({ doctors }) {
           focus: "series",
         },
         showSymbol: false,
-        data: doctors?.map((_doctor) => _doctor.revenue),
+        data:
+          // filterChartOfDoctor[0] !== []
+          //   ? filterChartOfDoctor.map((__doctorChart) => __doctorChart.revenue)
+          //   :
+          doctors?.map((_doctor) => _doctor.revenue),
       },
     ],
   };
