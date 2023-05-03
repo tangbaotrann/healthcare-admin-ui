@@ -110,6 +110,7 @@ function TableAccountList({ getToken }) {
         onCancel={handleCancel}
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
+        centered={true}
       >
         <ProfileDoctor getToken={getToken} handleCancel={handleCancel} />
       </Modal>

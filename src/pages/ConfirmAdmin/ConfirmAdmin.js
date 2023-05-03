@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  ArrowLeftOutlined,
-  LoadingOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
+import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Alert, Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 
@@ -14,7 +10,6 @@ import "./ConfirmAdmin.css";
 import {
   btnClickedGetPhoneNumberSelector,
   fetchApiLoginSelector,
-  isLoadingLoginSelector,
 } from "../../redux/selector";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { endPoints } from "../../routers";
@@ -39,9 +34,9 @@ function ConfirmAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log("phoneNumber", phoneNumber);
-  console.log("messageSuccess confirm admin ->", messageSuccess);
-  console.log("tokenAccount ->", tokenAccount);
+  // console.log("phoneNumber", phoneNumber);
+  // console.log("messageSuccess confirm admin ->", messageSuccess);
+  // console.log("tokenAccount ->", tokenAccount);
 
   useEffect(() => {
     messageSuccess?.accessToken && setTokenAccount(messageSuccess.accessToken);
@@ -118,15 +113,27 @@ function ConfirmAdmin() {
         {/* reCaptcha */}
         <div id="recaptcha-container"></div>
 
-        <Button
-          type="primary"
-          htmlType="submit"
-          block
-          disabled={disabledButton}
-          style={{ marginTop: "4px", marginBottom: "42px" }}
-        >
-          {isLoadingConfirmAdmin ? <LoadingOutlined spin /> : "Xác thực"}
-        </Button>
+        {tokenAccount ? (
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            disabled={disabledButton}
+            style={{ marginTop: "4px", marginBottom: "42px" }}
+          >
+            {isLoadingConfirmAdmin ? <LoadingOutlined spin /> : "Xác thực"}
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            disabled
+            style={{ marginTop: "4px", marginBottom: "42px" }}
+          >
+            {isLoadingConfirmAdmin ? <LoadingOutlined spin /> : "Xác thực"}
+          </Button>
+        )}
       </Form>
 
       {checkOTP ? (
@@ -155,7 +162,7 @@ function ConfirmAdmin() {
           ]}
           hasFeedback
         >
-          <Input prefix={<PhoneOutlined />} placeholder="Mã OTP của bạn..." />
+          <Input name="basic_otp" placeholder="Mã OTP của bạn..." />
         </Form.Item>
 
         <div className="register-footer">

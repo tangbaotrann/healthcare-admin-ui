@@ -17,9 +17,8 @@ function App() {
 
   const messageSuccess = useSelector(fetchApiLoginSelector);
 
-  // console.log("getToken - app router", getToken);
+  console.log("getToken - app router", getToken);
   // console.log("messageSuccess - app router", messageSuccess);
-  // console.log("getToken - app router", getToken);
 
   useEffect(() => {
     const getToken = JSON.parse(localStorage.getItem("token_user_login"));
@@ -54,6 +53,16 @@ function App() {
         />
         {/* Admin confirm */}
         <Route path={endPoints.adminConfirm} element={<ConfirmAdmin />} />
+        {/* <Route
+          path={endPoints.adminConfirm}
+          element={
+            typeof getToken === "undefined" || !getToken ? (
+              <Navigate replace to={endPoints.login} />
+            ) : (
+              <Navigate replace to={endPoints.admin} />
+            )
+          }
+        /> */}
       </Routes>
     </BrowserRouter>
   );

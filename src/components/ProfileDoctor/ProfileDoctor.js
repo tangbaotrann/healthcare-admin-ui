@@ -9,6 +9,7 @@ import userSlice, {
   fetchApiAwaitBrowsingRuleForDoctor,
   fetchApiDeleteAwaitBrowsingRuleForDoctor,
 } from "../../redux/features/userSlice";
+import moment from "moment";
 
 function ProfileDoctor({ getToken, handleCancel }) {
   const viewProfileDoctor = useSelector(fetchApiViewProfileDoctorByIdSelector);
@@ -69,7 +70,27 @@ function ProfileDoctor({ getToken, handleCancel }) {
           />
         </div>
         <p>
-          <b>- Chuyên gia:</b> {viewProfileDoctor.specialist?.join("")}
+          <b>- Họ tên:</b> {viewProfileDoctor.doctor.person.username}
+        </p>
+        <p>
+          <b>- Giới tính:</b>{" "}
+          {viewProfileDoctor.doctor.person.gender === true ? "Nam" : "Nữ"}
+        </p>
+        <p>
+          <b>- Năm sinh:</b>{" "}
+          {moment(viewProfileDoctor.doctor.person.dob).format("DD/MM/YYYY")}
+        </p>
+        <p>
+          <b>- Địa chỉ:</b> {viewProfileDoctor.doctor.person.address}
+        </p>
+        <p>
+          <b>- Chuyên gia:</b> {viewProfileDoctor.specialist?.join(" ")}
+        </p>
+        <p>
+          <b>- Đảm nhận:</b>{" "}
+          {viewProfileDoctor.doctor.work_type === "glycemic"
+            ? "Bệnh đường huyết"
+            : "Bệnh huyết áp"}
         </p>
         <p>
           <b>- Nơi đào tạo:</b> {viewProfileDoctor.training_place}

@@ -180,8 +180,8 @@ function Login() {
 
         {/* Register & Forgot-password button */}
         <div className="link-to">
-          <Link to={endPoints.register}>Đăng ký ngay</Link>
-          <Link to="/forgot-password">Quên mật khẩu</Link>
+          {/* <Link to={endPoints.register}>Đăng ký ngay</Link> */}
+          {/* <Link to="/forgot-password">Quên mật khẩu</Link> */}
         </div>
       </Form>
     </BackgroundOutSite>

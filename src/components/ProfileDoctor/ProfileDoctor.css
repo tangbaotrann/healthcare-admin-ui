@@ -3,6 +3,12 @@
     flex-direction: column;
 }
 
+.view-profile-doctor-container {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
 .view-profile-doctor-title {
     text-align: center;
     font-size: 2rem;
