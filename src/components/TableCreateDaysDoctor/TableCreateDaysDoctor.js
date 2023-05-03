@@ -5,6 +5,8 @@ import moment from "moment";
 // me
 import "./TableCreateDaysDoctor.css";
 import TitleName from "../TitleName";
+import "moment/locale/vi"; // without this line it didn't work
+moment.locale("vi");
 
 function TableCreateDaysDoctor({ daysCreate }) {
   // cols
@@ -39,8 +41,6 @@ function TableCreateDaysDoctor({ daysCreate }) {
           // day_number: day.day_number,
         }))}
         rowKey="_id"
-        // style={{ height: "100px" }}
-        // scroll={{ y: 360 }}
       ></Table>
     </>
   );

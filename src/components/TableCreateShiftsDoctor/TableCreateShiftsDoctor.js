@@ -55,8 +55,8 @@ function TableCreateShiftsDoctor({ shifts }) {
             ? shifts.map((shift, index) => ({
                 desc: shift.desc,
                 name: shift.name,
-                time_end: moment(shift.time_end).format("h:mm a"),
-                time_start: moment(shift.time_start).format("h:mm a"),
+                time_end: moment(shift.time_end).format("HH:mm"),
+                time_start: moment(shift.time_start).format("HH:mm"),
                 _id: index + 1,
                 shift_day: moment(shift.time_end).format("DD/MM/YYYY"),
               }))

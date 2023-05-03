@@ -17,7 +17,7 @@ function App() {
 
   const messageSuccess = useSelector(fetchApiLoginSelector);
 
-  console.log("getToken - app router", getToken);
+  // console.log("getToken - app router", getToken);
   // console.log("messageSuccess - app router", messageSuccess);
 
   useEffect(() => {

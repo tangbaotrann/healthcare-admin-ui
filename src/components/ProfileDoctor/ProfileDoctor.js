@@ -70,45 +70,45 @@ function ProfileDoctor({ getToken, handleCancel }) {
           />
         </div>
         <p>
-          <b>- Họ tên:</b> {viewProfileDoctor.doctor.person.username}
+          <b>- Họ tên:</b> {viewProfileDoctor?.doctor?.person?.username}
         </p>
         <p>
           <b>- Giới tính:</b>{" "}
-          {viewProfileDoctor.doctor.person.gender === true ? "Nam" : "Nữ"}
+          {viewProfileDoctor?.doctor?.person?.gender === true ? "Nam" : "Nữ"}
         </p>
         <p>
           <b>- Năm sinh:</b>{" "}
-          {moment(viewProfileDoctor.doctor.person.dob).format("DD/MM/YYYY")}
+          {moment(viewProfileDoctor?.doctor?.person?.dob).format("DD/MM/YYYY")}
         </p>
         <p>
-          <b>- Địa chỉ:</b> {viewProfileDoctor.doctor.person.address}
+          <b>- Địa chỉ:</b> {viewProfileDoctor?.doctor?.person?.address}
         </p>
         <p>
-          <b>- Chuyên gia:</b> {viewProfileDoctor.specialist?.join(" ")}
+          <b>- Chuyên gia:</b> {viewProfileDoctor?.specialist?.join(" ")}
         </p>
         <p>
           <b>- Đảm nhận:</b>{" "}
-          {viewProfileDoctor.doctor.work_type === "glycemic"
+          {viewProfileDoctor?.doctor?.work_type === "glycemic"
             ? "Bệnh đường huyết"
             : "Bệnh huyết áp"}
         </p>
         <p>
-          <b>- Nơi đào tạo:</b> {viewProfileDoctor.training_place}
+          <b>- Nơi đào tạo:</b> {viewProfileDoctor?.training_place}
         </p>
         <p>
-          <b>- Bằng cấp:</b> {viewProfileDoctor.degree}
+          <b>- Bằng cấp:</b> {viewProfileDoctor?.degree}
         </p>
         <p>
-          <b>- Ngôn ngữ:</b> {viewProfileDoctor.languages?.join("")}
+          <b>- Ngôn ngữ:</b> {viewProfileDoctor?.languages?.join("")}
         </p>
         <p>
-          <b>- Chứng chỉ:</b> {viewProfileDoctor.certificate}
+          <b>- Chứng chỉ:</b> {viewProfileDoctor?.certificate}
         </p>
         <p>
-          <b>- Giáo dục:</b> {viewProfileDoctor.education}
+          <b>- Giáo dục:</b> {viewProfileDoctor?.education}
         </p>
         <p>
-          <b>- Kinh nghiệm:</b> {viewProfileDoctor.experiences?.join("")}
+          <b>- Kinh nghiệm:</b> {viewProfileDoctor?.experiences?.join("")}
         </p>
 
         <Button
