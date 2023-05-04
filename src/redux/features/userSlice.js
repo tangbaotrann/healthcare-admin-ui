@@ -268,6 +268,9 @@ const userSlice = createSlice({
     btnClickedGetPhone: (state, action) => {
       state.btnClickedGetPhoneNumber = action.payload;
     },
+    clickedLogoutAdmin: (state, action) => {
+      state.login = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder

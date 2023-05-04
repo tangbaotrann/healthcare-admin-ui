@@ -9,7 +9,8 @@ import {
   TableOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons/lib/icons";
-import { Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, theme } from "antd";
+import { useNavigate } from "react-router-dom";
 
 // me
 import "./DefaultLayout.css";
@@ -17,7 +18,8 @@ import constants from "../../utils/constants";
 import layoutSlice from "../../redux/features/layoutSlice";
 import ParticlesBackground from "../../components/ParticlesBackground";
 import { logo } from "../../asset/images";
-import { fetchApiAllMetric } from "../../redux/features/metricSlice";
+import { endPoints } from "../../routers";
+import userSlice from "../../redux/features/userSlice";
 
 const { Header, Sider, Content } = Layout;
 
@@ -28,6 +30,14 @@ function DefaultLayout({ children }) {
   } = theme.useToken();
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token_user_login");
+    dispatch(userSlice.actions.clickedLogoutAdmin([]));
+    navigate(`${endPoints.login}`);
+  };
 
   return (
     <Layout>
@@ -116,6 +126,12 @@ function DefaultLayout({ children }) {
       </Sider>
       <Layout className="site-layout">
         <Header style={{ padding: 0 }}>
+          <div className="admin-header-logout">
+            <Button className="btn-logout" onClick={handleLogout}>
+              Đăng xuất
+            </Button>
+          </div>
+
           {React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
             {
