@@ -8,7 +8,6 @@ import "./Dashboard.css";
 import Statistics from "./Statistics";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchApiLoginSelector,
   fetchApiUserDoctorsSelector,
   filterTotalAccountAwaiting,
   filterTotalDoctors,

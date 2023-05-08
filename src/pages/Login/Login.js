@@ -5,7 +5,7 @@ import PhoneInput from "react-phone-number-input";
 import { Form, Input, Button, Alert } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // me
 import "./Login.css";
@@ -21,6 +21,7 @@ import {
 } from "../../redux/selector";
 
 function Login() {
+  const getToken = JSON.parse(localStorage.getItem("token_user_login"));
   const [number, setNumber] = useState("");
   const [messageError, setMessageError] = useState(false);
   const [checkPhone, setCheckPhone] = useState(false);
@@ -33,6 +34,7 @@ function Login() {
   const messageSuccess = useSelector(fetchApiLoginSelector);
   const isLoading = useSelector(isLoadingLoginSelector);
 
+  // console.log("getToken", getToken);
   // console.log("messageSuccess", messageSuccess);
 
   useEffect(() => {
@@ -50,6 +52,10 @@ function Login() {
     number,
     ruleAccount.rule,
   ]);
+
+  useEffect(() => {
+    getToken && navigate(`${endPoints.admin}`);
+  }, [getToken]);
 
   // handle submit login
   const handleOnFishSubmitLogin = (values) => {
@@ -69,7 +75,7 @@ function Login() {
         axios
           .get(`${process.env.REACT_APP_BASE_URL}accounts/phone/${formatPhone}`)
           .then((res) => {
-            console.log("res login ->", res.data.data);
+            // console.log("res login ->", res.data.data);
 
             dispatch(fetchApiLogin(values));
             setCheckPhone(false);
