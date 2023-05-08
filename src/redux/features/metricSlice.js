@@ -128,6 +128,34 @@ export const fetchApiMetricBlood = createAsyncThunk(
   }
 );
 
+export const fetchApiUpdatedNotificationRule = createAsyncThunk(
+  "metric/fetchApiUpdatedNotificationRule",
+  async ({ values, token }) => {
+    try {
+      const { _id, notification } = values;
+
+      const res = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}rules/${_id}`,
+        {
+          notification: notification,
+        },
+        {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${token}`,
+            ContentType: "application/json",
+          },
+        }
+      );
+      console.log("res ", res.data.data);
+
+      return res.data.data;
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+);
+
 const metricSlice = createSlice({
   name: "metric",
   initialState: {
@@ -135,6 +163,7 @@ const metricSlice = createSlice({
     bmi: [],
     glycemic: [],
     isLoading: false,
+    updatedNotification: [],
   },
   extraReducers: (builder) => {
     builder
@@ -159,6 +188,17 @@ const metricSlice = createSlice({
       .addCase(fetchApiAllMetric.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
+      })
+      .addCase(fetchApiUpdatedNotificationRule.fulfilled, (state, action) => {
+        console.log("ac.pay", action.payload);
+
+        const _updated = state.data.find(
+          (_notification) => _notification._id === action.payload._id
+        );
+
+        if (_updated) {
+          _updated.notification = action.payload.notification;
+        }
       });
   },
 });

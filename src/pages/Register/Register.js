@@ -1,6 +1,6 @@
 // lib
-import { KeyOutlined, PhoneOutlined } from "@ant-design/icons/lib/icons";
-import { Form, Input, Button, Select } from "antd";
+import { KeyOutlined } from "@ant-design/icons/lib/icons";
+import { Form, Input, Button } from "antd";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useState } from "react";

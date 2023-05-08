@@ -22,7 +22,7 @@ function ManagerMetricMBI({ getToken }) {
 
   const metrics = useSelector(listMetricTypeMBI);
 
-  console.log("token bmi ->", getToken);
+  // console.log("token bmi ->", getToken);
   // console.log("metrics bmi ->", metrics);
 
   useEffect(() => {
@@ -154,7 +154,7 @@ function ManagerMetricMBI({ getToken }) {
       </Modal>
 
       {/* Table list */}
-      <TableListMetricMBI metrics={metrics} />
+      <TableListMetricMBI metrics={metrics} getToken={getToken} />
     </>
   );
 }

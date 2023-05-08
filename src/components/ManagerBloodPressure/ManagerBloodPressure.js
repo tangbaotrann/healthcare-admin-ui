@@ -36,7 +36,6 @@ function ManagerBloodPressure({ getToken }) {
 
   // handle submit
   const handleOnFishSendNotification = (values) => {
-    console.log("values", values);
     if (values) {
       dispatch(
         fetchApiMetricBlood({
@@ -75,32 +74,32 @@ function ManagerBloodPressure({ getToken }) {
             },
           ]}
         >
-          {/* Chỉ số systolic */}
-          <Form.Item
-            name="start"
-            rules={[
-              {
-                required: true,
-                message: "Bạn cần phải nhập chỉ số bắt đầu.", // "Bạn cần phải nhập chỉ số tâm thu.",
-              },
-            ]}
-            hasFeedback
-          >
-            <Input placeholder="Chỉ số bắt đầu..." />
-          </Form.Item>
-
           {/* Chỉ số diastole */}
           <Form.Item
             name="end"
             rules={[
               {
                 required: true,
-                message: "Bạn cần phải nhập chỉ số kết thúc.", //"Bạn cần phải nhập chỉ số tâm trương.",
+                message: "Bạn cần phải nhập chỉ số tâm trương.",
               },
             ]}
             hasFeedback
           >
-            <Input placeholder="Chỉ số kết thúc..." />
+            <Input placeholder="Chỉ số tâm trương..." />
+          </Form.Item>
+
+          {/* Chỉ số systolic */}
+          <Form.Item
+            name="start"
+            rules={[
+              {
+                required: true,
+                message: "Bạn cần phải nhập chỉ số tâm thu.",
+              },
+            ]}
+            hasFeedback
+          >
+            <Input placeholder="Chỉ số tâm thu..." />
           </Form.Item>
 
           {/* Nội dung */}
@@ -130,7 +129,7 @@ function ManagerBloodPressure({ getToken }) {
       </Modal>
 
       {/* Table list */}
-      <TableListBloodPressure />
+      <TableListBloodPressure getToken={getToken} />
     </>
   );
 }
