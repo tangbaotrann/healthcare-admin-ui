@@ -1,7 +1,7 @@
 // lib
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message, Modal, Select } from "antd";
+import { Button, Form, Input, Modal, Select } from "antd";
 
 // me
 import "./ManagerMetricMBI.css";

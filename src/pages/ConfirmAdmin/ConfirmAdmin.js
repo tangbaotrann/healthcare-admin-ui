@@ -64,7 +64,7 @@ function ConfirmAdmin() {
   const handleOnFinishVerifyOTP = async (values) => {
     const { basic_otp } = values;
 
-    console.log("basic_otp", basic_otp);
+    // console.log("basic_otp", basic_otp);
 
     try {
       if (values) {

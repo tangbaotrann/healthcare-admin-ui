@@ -1,36 +1,29 @@
 // me
 import { ArrowUpOutlined } from "@ant-design/icons";
-import { Divider, Select } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { Divider } from "antd";
+import { useSelector } from "react-redux";
 
 import "./Statistics.css";
 import StatisticsChart from "../StatisticsChart";
 import { groupNumber } from "../../../utils/formatPrice";
-import {
-  fetchApiDoctorById,
-  fetchApiUserDoctors,
-} from "../../../redux/features/userSlice";
 import { fetchApiDoctorByIdSelector } from "../../../redux/selector";
-import { useEffect } from "react";
 
 function Statistics({ totalPrice, doctors }) {
-  const dispatch = useDispatch();
-
   const filterChartOfDoctor = useSelector(fetchApiDoctorByIdSelector);
 
   // useEffect(() => {
   //   dispatch(fetchApiUserDoctors());
   // }, []);
 
-  const handleChange = (value) => {
-    console.log("value", value);
+  // const handleChange = (value) => {
+  //   console.log("value", value);
 
-    // if (value === "all") {
-    //   dispatch(fetchApiUserDoctors());
-    // } else {
-    // }
-    dispatch(fetchApiDoctorById(value));
-  };
+  //   // if (value === "all") {
+  //   //   dispatch(fetchApiUserDoctors());
+  //   // } else {
+  //   // }
+  //   dispatch(fetchApiDoctorById(value));
+  // };
 
   return (
     <div className="statistics-wrapper">

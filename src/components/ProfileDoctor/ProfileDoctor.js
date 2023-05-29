@@ -14,8 +14,8 @@ import moment from "moment";
 function ProfileDoctor({ getToken, handleCancel }) {
   const viewProfileDoctor = useSelector(fetchApiViewProfileDoctorByIdSelector);
 
-  console.log("viewProfileDoctor", viewProfileDoctor);
-  console.log("token viewProfileDoctor", getToken);
+  // console.log("viewProfileDoctor", viewProfileDoctor);
+  // console.log("token viewProfileDoctor", getToken);
 
   const dispatch = useDispatch();
 
@@ -53,6 +53,23 @@ function ProfileDoctor({ getToken, handleCancel }) {
       handleCancel();
     } else {
       message.error("Từ chối duyệt tài khoản không thành công!");
+    }
+  };
+
+  // handle cancel account deleted
+  const handleCancelAccountDeleted = () => {
+    if (getToken) {
+      dispatch(
+        fetchApiDeleteAwaitBrowsingRuleForDoctor({
+          account_id: viewProfileDoctor.doctor._id,
+          deleted: false,
+          token: getToken,
+        })
+      );
+      message.success("Bạn đã bỏ chặn với tài khoản này!");
+      handleCancel();
+    } else {
+      message.error("Bỏ chặn tài khoản không thành công!");
     }
   };
 
@@ -111,22 +128,36 @@ function ProfileDoctor({ getToken, handleCancel }) {
           <b>- Kinh nghiệm:</b> {viewProfileDoctor?.experiences?.join("")}
         </p>
 
-        <Button
-          type="primary"
-          style={{ marginRight: "10px", marginBottom: "10px" }}
-          onClick={handleAwaitBrowsingDoctor}
-          block
-        >
-          Duyệt
-        </Button>
-        <Button
-          type="primary"
-          danger
-          onClick={handleDeleteAwaitBrowsingDoctor}
-          block
-        >
-          Không duyệt
-        </Button>
+        {viewProfileDoctor?.doctor?.deleted ? (
+          <Button
+            type="primary"
+            danger
+            style={{ marginRight: "10px", marginBottom: "10px" }}
+            onClick={handleCancelAccountDeleted}
+            block
+          >
+            Bỏ chặn
+          </Button>
+        ) : (
+          <>
+            <Button
+              type="primary"
+              style={{ marginRight: "10px", marginBottom: "10px" }}
+              onClick={handleAwaitBrowsingDoctor}
+              block
+            >
+              Duyệt
+            </Button>
+            <Button
+              type="primary"
+              danger
+              onClick={handleDeleteAwaitBrowsingDoctor}
+              block
+            >
+              Không duyệt
+            </Button>
+          </>
+        )}
       </div>
     </>
   );

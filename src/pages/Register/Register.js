@@ -4,60 +4,57 @@ import { Form, Input, Button } from "antd";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 // me
 import "./Register.css";
 import BackgroundOutSite from "../../components/BackgroundOutSite/BackgroundOutSite";
-import { endPoints } from "../../routers";
-import { useUserAuth } from "../../context/UserAuthContext";
 import { fetchApiRegister } from "../../redux/features/userSlice";
 
 function Register() {
   const [number, setNumber] = useState("");
   const [flag, setFlag] = useState(false);
-  const [confirmOTP, setConfirmOTP] = useState("");
+  // const [confirmOTP, setConfirmOTP] = useState("");
 
   const dispatch = useDispatch();
 
-  const { setUpRecaptcha } = useUserAuth();
+  // const { setUpRecaptcha } = useUserAuth();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // handle send otp
   const handleOnFinishSendOTP = async (values) => {
-    const { phone_number } = values;
-
-    console.log("phone_number", phone_number);
+    // const { phone_number } = values;
+    // console.log("phone_number", phone_number);
 
     if (values) {
       dispatch(fetchApiRegister(values));
     }
 
-    try {
-      // const res = await setUpRecaptcha(phone_number);
-      // console.log(res);
-      // setConfirmOTP(res);
-      // setFlag(true);
-    } catch (err) {
-      console.log({ err });
-    }
+    // try {
+    //   const res = await setUpRecaptcha(phone_number);
+    //   console.log(res);
+    //   setConfirmOTP(res);
+    //   setFlag(true);
+    // } catch (err) {
+    //   console.log({ err });
+    // }
   };
 
   // handle verify OTP
-  const handleOnFinishVerifyOTP = async (values) => {
-    const { basic_otp } = values;
+  // const handleOnFinishVerifyOTP = async (values) => {
+  //   const { basic_otp } = values;
 
-    console.log("basic_otp", basic_otp);
+  //   console.log("basic_otp", basic_otp);
 
-    try {
-      await confirmOTP.confirm(basic_otp);
-      navigate(`${endPoints.admin}`);
-    } catch (err) {
-      console.log({ err });
-    }
-  };
+  //   try {
+  //     await confirmOTP.confirm(basic_otp);
+  //     navigate(`${endPoints.admin}`);
+  //   } catch (err) {
+  //     console.log({ err });
+  //   }
+  // };
 
   return (
     <BackgroundOutSite>

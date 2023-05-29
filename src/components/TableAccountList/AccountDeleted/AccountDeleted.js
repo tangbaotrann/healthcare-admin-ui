@@ -1,47 +1,22 @@
-// lib
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import TitleName from "../../TitleName/TitleName";
+import { listAccountDoctorDeleted } from "../../../redux/selector";
 import { Button, Modal, Table } from "antd";
 import moment from "moment";
-
-// me
-import "./TableAccountList.css";
+import ProfileDoctor from "../../ProfileDoctor/ProfileDoctor";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   fetchApiUserDoctors,
   fetchApiViewProfileDoctorById,
-} from "../../redux/features/userSlice";
-import { listAwaitBrowsingAccountDoctor } from "../../redux/selector";
-import ProfileDoctor from "../ProfileDoctor/ProfileDoctor";
-import TitleName from "../TitleName/TitleName";
+} from "../../../redux/features/userSlice";
 
-function TableAccountList({ getToken }) {
+function AccountDeleted({ getToken }) {
   const [showModalProfileDoctor, setShowModalProfileDoctor] = useState(false);
 
   const dispatch = useDispatch();
 
-  const listUsers = useSelector(listAwaitBrowsingAccountDoctor);
-
-  // console.log("token tbl account list ->", getToken);
-  // console.log("listUsers ->", listUsers);
-
-  // fetch all user
-  useEffect(() => {
-    dispatch(fetchApiUserDoctors());
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // handle view profile doctor
-  const handleViewProfile = (record) => {
-    console.log(record);
-    dispatch(fetchApiViewProfileDoctorById(record));
-    setShowModalProfileDoctor(true);
-  };
-
-  // close modal view profile doctor
-  const handleCancel = () => {
-    setShowModalProfileDoctor(false);
-  };
+  const listAccountDeleted = useSelector(listAccountDoctorDeleted);
 
   // columns
   const cols = [
@@ -85,13 +60,31 @@ function TableAccountList({ getToken }) {
     },
   ];
 
+  // fetch all user
+  useEffect(() => {
+    dispatch(fetchApiUserDoctors());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // handle view profile doctor
+  const handleViewProfile = (record) => {
+    console.log(record);
+    dispatch(fetchApiViewProfileDoctorById(record));
+    setShowModalProfileDoctor(true);
+  };
+
+  // close modal view profile doctor
+  const handleCancel = () => {
+    setShowModalProfileDoctor(false);
+  };
+
   return (
-    <>
-      <TitleName>
-        Danh Sách Duyệt Tài Khoản Khi Đăng Ký Tài Khoản Cho Bác Sĩ
-      </TitleName>
+    <div>
+      <TitleName>Danh Sách Tài Khoản Đã Bị Chặn</TitleName>
+
       <Table
-        dataSource={listUsers.map((user, index) => ({
+        dataSource={listAccountDeleted.map((user, index) => ({
           // user.person.account
           account: index + 1,
           username: user.person.username,
@@ -114,8 +107,8 @@ function TableAccountList({ getToken }) {
       >
         <ProfileDoctor getToken={getToken} handleCancel={handleCancel} />
       </Modal>
-    </>
+    </div>
   );
 }
 
-export default TableAccountList;
+export default AccountDeleted;

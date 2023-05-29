@@ -71,9 +71,19 @@ function DefaultLayout({ children }) {
               label: "Bảng điều khiển",
             },
             {
-              key: constants.layoutListAccount,
+              key: "listAccount",
               icon: <OrderedListOutlined />,
-              label: "Danh sách Bác sĩ đợi duyệt",
+              label: "Quản lý tài khoản Bác sĩ",
+              children: [
+                {
+                  label: "Tài khoản đợi duyệt",
+                  key: constants.layoutListAccount,
+                },
+                {
+                  label: "Tài khoản bị chặn",
+                  key: constants.layoutAccountDeleted,
+                },
+              ],
             },
             {
               key: constants.layoutShiftsDoctor,
@@ -119,6 +129,8 @@ function DefaultLayout({ children }) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             } else if (item.key === constants.layoutMetricTypeBloodPressure) {
               // dispatch(dispatch(fetchApiAllMetric()));
+              dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
+            } else if (item.key === constants.layoutAccountDeleted) {
               dispatch(layoutSlice.actions.btnClickMenuChangeLayout(item.key));
             }
           }}

@@ -8,7 +8,7 @@ export const fetchApiAllMetric = createAsyncThunk(
   async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_BASE_URL}rules`);
-      console.log("res", res.data.data);
+      // console.log("res", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -22,7 +22,7 @@ export const fetchApiMetricBMI = createAsyncThunk(
   "metric/fetchApiMetricBMI",
   async ({ values, token }) => {
     try {
-      console.log("values", values);
+      // console.log("values", values);
       const { start, end, notification, type, gender } = values;
       let _gender = gender === 0 ? true : false;
 
@@ -43,7 +43,7 @@ export const fetchApiMetricBMI = createAsyncThunk(
           },
         }
       );
-      console.log("res", res.data.data);
+      // console.log("res", res.data.data);
       message.success("Tạo tập luật thành công!");
 
       return res.data.data;
@@ -60,7 +60,7 @@ export const fetchApiMetricGlycemic = createAsyncThunk(
   "metric/fetchApiMetricGlycemic",
   async ({ values, token }) => {
     try {
-      console.log("values", values);
+      // console.log("values", values);
       const { start, end, notification, type, case_gly } = values;
 
       const res = await axios.post(
@@ -80,7 +80,7 @@ export const fetchApiMetricGlycemic = createAsyncThunk(
           },
         }
       );
-      console.log("res", res.data.data);
+      // console.log("res", res.data.data);
       message.success("Tạo tập luật thành công.");
 
       return res.data.data;
@@ -97,7 +97,7 @@ export const fetchApiMetricBlood = createAsyncThunk(
   "metric/fetchApiMetricBlood",
   async ({ values, token }) => {
     try {
-      console.log("values", values);
+      // console.log("values", values);
       const { start, end, notification, type } = values;
 
       const res = await axios.post(
@@ -116,7 +116,7 @@ export const fetchApiMetricBlood = createAsyncThunk(
           },
         }
       );
-      console.log("res blood", res.data.data);
+      // console.log("res blood", res.data.data);
       message.success("Tạo tập luật thành công.");
 
       return res.data.data;
@@ -147,7 +147,7 @@ export const fetchApiUpdatedNotificationRule = createAsyncThunk(
           },
         }
       );
-      console.log("res ", res.data.data);
+      // console.log("res ", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -190,7 +190,7 @@ const metricSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchApiUpdatedNotificationRule.fulfilled, (state, action) => {
-        console.log("ac.pay", action.payload);
+        // console.log("ac.pay", action.payload);
 
         const _updated = state.data.find(
           (_notification) => _notification._id === action.payload._id

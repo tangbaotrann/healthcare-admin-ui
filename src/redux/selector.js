@@ -60,7 +60,7 @@ export const isLoadingFetchApiAllMetric = (state) =>
 export const filterTotalPatients = createSelector(
   fetchApiUserPatientsSelector,
   (patients) => {
-    console.log("patients selector", patients);
+    // console.log("patients selector", patients);
     if (patients?.length > 0) {
       return patients.length;
     }
@@ -127,13 +127,29 @@ export const filterTotalAccountAwaiting = createSelector(
 export const listAwaitBrowsingAccountDoctor = createSelector(
   fetchApiUserDoctorsSelector,
   (listAccount) => {
-    console.log("li", listAccount);
+    // console.log("li", listAccount);
     if (listAccount) {
       const list = listAccount.filter(
         (_account) =>
           _account.is_accepted === false && _account.deleted === false
       );
-      console.log("l", list);
+      // console.log("l", list);
+      return list;
+    } else {
+      return [];
+    }
+  }
+);
+
+// load all account deleted
+// load list await browsing account for doctor with isAccepted: false
+export const listAccountDoctorDeleted = createSelector(
+  fetchApiUserDoctorsSelector,
+  (listAccount) => {
+    // console.log("all account ->", listAccount);
+    if (listAccount) {
+      const list = listAccount.filter((_account) => _account.deleted);
+      // console.log("account deleted ->", list);
       return list;
     } else {
       return [];
@@ -145,7 +161,7 @@ export const listAwaitBrowsingAccountDoctor = createSelector(
 export const listMetricTypeMBI = createSelector(
   fetchApiAllMetricSelector,
   (listMetricType) => {
-    console.log("listMetricType", listMetricType);
+    // console.log("listMetricType", listMetricType);
     const list = listMetricType.filter(
       (_metricType) => _metricType.type === "BMI"
     );
@@ -158,11 +174,11 @@ export const listMetricTypeMBI = createSelector(
 export const listMetricTypeGlycemic = createSelector(
   fetchApiAllMetricSelector,
   (listMetricType) => {
-    console.log("listMetricType", listMetricType);
+    // console.log("listMetricType", listMetricType);
     const list = listMetricType.filter(
       (_metricType) => _metricType.type === "GLYCEMIC"
     );
-    console.log("list", list);
+    // console.log("list", list);
 
     return list;
   }
@@ -172,11 +188,11 @@ export const listMetricTypeGlycemic = createSelector(
 export const listMetricTypeBlood = createSelector(
   fetchApiAllMetricSelector,
   (listMetricType) => {
-    console.log("listMetricType", listMetricType);
+    // console.log("listMetricType", listMetricType);
     const list = listMetricType.filter(
       (_metricType) => _metricType.type === "BLOOD"
     );
-    console.log("list", list);
+    // console.log("list", list);
 
     return list;
   }

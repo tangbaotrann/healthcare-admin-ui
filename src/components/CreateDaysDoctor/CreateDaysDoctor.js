@@ -1,7 +1,7 @@
 //lib
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message, Modal, Select } from "antd";
+import { Button, Form, Input, Modal, Select } from "antd";
 
 // me
 import "./CreateDaysDoctor.css";
@@ -25,7 +25,7 @@ function CreateDaysDoctor({ getToken }) {
 
   const daysCreate = useSelector(fetchApiAllCreateDaysDoctorSelector);
 
-  console.log("daysCreate", daysCreate);
+  // console.log("daysCreate", daysCreate);
 
   useEffect(() => {
     dispatch(fetchApiAllCreateDaysDoctor());

@@ -4,10 +4,9 @@ import * as echarts from "echarts";
 
 // me
 import "./StatisticsChart.css";
-import moment from "moment";
 
 function StatisticsChart({ doctors, filterChartOfDoctor }) {
-  console.log("filterChartOfDoctor", filterChartOfDoctor);
+  // console.log("filterChartOfDoctor", filterChartOfDoctor);
   // console.log("filterChartOfDoctor", [filterChartOfDoctor.revenue]);
 
   // option

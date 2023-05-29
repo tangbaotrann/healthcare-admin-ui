@@ -7,6 +7,7 @@ const constants = {
   layoutMetricTypeGlycemic: "glycemic",
   layoutMetricTypeBloodPressure: "bloodPressure",
   layoutDashboard: "dashboard",
+  layoutAccountDeleted: "deletedAccount",
 };
 
 export default constants;

@@ -33,7 +33,7 @@ export const fetchApiCreateShiftsDoctor = createAsyncThunk(
       );
       message.success("Bạn đã tạo ca làm thành công cho Bác sĩ.");
 
-      console.log("res ->", res.data.data);
+      // console.log("res ->", res.data.data);
 
       return res.data.data;
     } catch (err) {

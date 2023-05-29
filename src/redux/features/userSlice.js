@@ -10,7 +10,7 @@ export const fetchApiLogin = createAsyncThunk(
 
       const formatPhone = phone_number.replace("+84", "0");
 
-      console.log("formatPhone ->", formatPhone);
+      // console.log("formatPhone ->", formatPhone);
 
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}auth/login`,
@@ -26,12 +26,12 @@ export const fetchApiLogin = createAsyncThunk(
       //   JSON.stringify(res.data.data.accessToken)
       // );
 
-      console.log("login ->", res.data.data);
+      // console.log("login ->", res.data.data);
 
       return res.data.data;
     } catch (err) {
       const message = err.response.data;
-      console.log(message);
+      // console.log(message);
       return rejectWithValue(message);
     }
   }
@@ -46,7 +46,7 @@ export const fetchApiRegister = createAsyncThunk(
 
       const formatPhone = phone_number.replace("+84", "0");
 
-      console.log("formatPhone ->", formatPhone);
+      // console.log("formatPhone ->", formatPhone);
 
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}auth/register`,
@@ -59,7 +59,7 @@ export const fetchApiRegister = createAsyncThunk(
           headers: { Authorization: "***" },
         }
       );
-      console.log("res", res.data.data);
+      // console.log("res", res.data.data);
 
       localStorage.setItem(
         "token_user_login",
@@ -112,7 +112,7 @@ export const fetchApiUserPatients = createAsyncThunk(
         }
       );
 
-      console.log("res all patient", res.data.data);
+      // console.log("res all patient", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -139,7 +139,7 @@ export const fetchApiDoctorById = createAsyncThunk(
             },
           }
         );
-        console.log("res doctor by id", res.data.data);
+        // console.log("res doctor by id", res.data.data);
 
         return res.data.data;
       }
@@ -157,9 +157,9 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
       // const getToken = JSON.parse(localStorage.getItem("token_user_login"));
       // const { account_id, is_accepted, token } = values;
 
-      console.log("account_id", account_id);
-      console.log("is_accepted", is_accepted);
-      console.log("token", token);
+      // console.log("account_id", account_id);
+      // console.log("is_accepted", is_accepted);
+      // console.log("token", token);
 
       const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}rules/doctor/${account_id}`, // ${process.env.REACT_APP_BASE_URL}doctors/${accountId}
@@ -173,7 +173,7 @@ export const fetchApiAwaitBrowsingRuleForDoctor = createAsyncThunk(
         }
       );
 
-      console.log("res ->", res.data.data);
+      // console.log("res ->", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -199,7 +199,7 @@ export const fetchApiDeleteAwaitBrowsingRuleForDoctor = createAsyncThunk(
         }
       );
 
-      console.log("res del ->", res.data.data);
+      // console.log("res del ->", res.data.data);
 
       return res.data.data;
     } catch (err) {
@@ -238,7 +238,7 @@ export const fetchApiViewProfileDoctorById = createAsyncThunk(
           experiences: experiences,
         }
       );
-      console.log("res view profile", res.data.data);
+      // console.log("res view profile", res.data.data);
 
       return res.data.data;
     } catch (err) {

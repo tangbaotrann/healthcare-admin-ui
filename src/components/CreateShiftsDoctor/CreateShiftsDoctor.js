@@ -11,11 +11,7 @@ import {
   fetchApiCreateShiftsDoctor,
 } from "../../redux/features/shiftsSlice";
 import TableCreateShiftsDoctor from "../TableCreateShiftsDoctor";
-import {
-  fetchApiAllShiftsDoctorSelector,
-  filterCheckShifts,
-} from "../../redux/selector";
-import moment from "moment";
+import { fetchApiAllShiftsDoctorSelector } from "../../redux/selector";
 
 // config select time
 const format = "HH:mm";
@@ -28,7 +24,7 @@ function CreateShiftsDoctor({ getToken }) {
   const shifts = useSelector(fetchApiAllShiftsDoctorSelector); // filterCheckShifts
 
   // console.log("getToken", getToken);
-  console.log("shifts", shifts);
+  // console.log("shifts", shifts);
 
   useEffect(() => {
     dispatch(fetchApiAllShiftsDoctor());
@@ -48,12 +44,8 @@ function CreateShiftsDoctor({ getToken }) {
 
   // handle create shifts doctor
   const handleCreateShiftsDoctor = (values) => {
-    console.log("values", values);
+    // console.log("values", values);
     if (values) {
-      // const timeStart = moment(values.time_start).format('HH:mm');
-      // ngày
-      // const scheduleDateStart = moment(schedule.date_compare._i.split('/').reverse().join('/') + ' ' + timeStart);
-
       dispatch(
         fetchApiCreateShiftsDoctor({
           values: values,

@@ -19,6 +19,7 @@ import {
 } from "../../redux/selector";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import ManagerBloodPressure from "../../components/ManagerBloodPressure/ManagerBloodPressure";
+import AccountDeleted from "../../components/TableAccountList/AccountDeleted/AccountDeleted";
 
 function AdminManager({ getToken }) {
   const changeLayout = useSelector(btnClickMenuChangeLayoutSelector);
@@ -58,6 +59,8 @@ function AdminManager({ getToken }) {
           <ManagerMetricGlycemic getToken={getToken} />
         ) : changeLayout === constants.layoutMetricTypeBloodPressure ? (
           <ManagerBloodPressure getToken={getToken} />
+        ) : changeLayout === constants.layoutAccountDeleted ? (
+          <AccountDeleted getToken={getToken} />
         ) : null}
       </DefaultLayout>
     </>
